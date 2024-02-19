@@ -11,7 +11,7 @@
 	"CREATE_TEAMS": {"TIME":"weekly|thursday|23:55:00", 
 					"SPORTS": ["HOCKEY", "BASKETBALL"]},
 
-	"GET_RESULTS": {"TIME":"weekly|monday|14:11:30", 
+	"GET_RESULTS": {"TIME":"weekly|monday|14:16:30", 
 					"SPORTS": ["FOOTBALL", "BASKETBALL", "HOCKEY", "AM._FOOTBALL",
 					  "BASEBALL","BOXING", "VOLLEYBALL"]},
 
