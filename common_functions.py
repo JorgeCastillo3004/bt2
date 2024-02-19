@@ -136,7 +136,7 @@ def launch_navigator(url, database_enable):
 	# options.add_experimental_option("excludeSwitches", ["enable-automation"]) ----
 	options.add_experimental_option("useAutomationExtension", False)
 	# if database_enable:
-	# options.add_argument('--headless')
+	options.add_argument('--headless')
 	options.add_argument('--no-sandbox')
 	# options.add_argument('--disable-dev-shm-usage')  ---	
 	# chrome_path = os.getcwd()+'/chrome_files'
