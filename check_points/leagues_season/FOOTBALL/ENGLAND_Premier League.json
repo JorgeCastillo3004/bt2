@@ -1,0 +1,82 @@
+{
+    "Liverpool": {
+        "team_id": "lepc04659",
+        "team_url": "https://www.flashscore.com/team/liverpool/lId4TMwf/"
+    },
+    "Arsenal": {
+        "team_id": "xksg09050",
+        "team_url": "https://www.flashscore.com/team/arsenal/hA1Zm19f/"
+    },
+    "Manchester City": {
+        "team_id": "pdhk01765",
+        "team_url": "https://www.flashscore.com/team/manchester-city/Wtn9Stg0/"
+    },
+    "Aston Villa": {
+        "team_id": "oifm90681",
+        "team_url": "https://www.flashscore.com/team/aston-villa/W00wmLO0/"
+    },
+    "Tottenham": {
+        "team_id": "yccr90289",
+        "team_url": "https://www.flashscore.com/team/tottenham/UDg08Ohm/"
+    },
+    "Manchester Utd": {
+        "team_id": "fcei06823",
+        "team_url": "https://www.flashscore.com/team/manchester-united/ppjDR086/"
+    },
+    "Brighton": {
+        "team_id": "htfy05785",
+        "team_url": "https://www.flashscore.com/team/brighton/2XrRecc3/"
+    },
+    "Newcastle": {
+        "team_id": "tvsp99117",
+        "team_url": "https://www.flashscore.com/team/newcastle-utd/p6ahwuwJ/"
+    },
+    "West Ham": {
+        "team_id": "oclb99618",
+        "team_url": "https://www.flashscore.com/team/west-ham/Cxq57r8g/"
+    },
+    "Chelsea": {
+        "team_id": "oszf91040",
+        "team_url": "https://www.flashscore.com/team/chelsea/4fGZN2oK/"
+    },
+    "Wolves": {
+        "team_id": "syzi09493",
+        "team_url": "https://www.flashscore.com/team/wolves/j3Azpf5d/"
+    },
+    "Fulham": {
+        "team_id": "blqa98897",
+        "team_url": "https://www.flashscore.com/team/fulham/69ZiU2Om/"
+    },
+    "Bournemouth": {
+        "team_id": "eyhw96627",
+        "team_url": "https://www.flashscore.com/team/bournemouth/OtpNdwrc/"
+    },
+    "Brentford": {
+        "team_id": "mwyk91416",
+        "team_url": "https://www.flashscore.com/team/brentford/xYe7DwID/"
+    },
+    "Nottingham": {
+        "team_id": "opzw09044",
+        "team_url": "https://www.flashscore.com/team/nottingham/UsushcZr/"
+    },
+    "Crystal Palace": {
+        "team_id": "dugc91160",
+        "team_url": "https://www.flashscore.com/team/crystal-palace/AovF1Mia/"
+    },
+    "Luton": {
+        "team_id": "xreu99086",
+        "team_url": "https://www.flashscore.com/team/luton/SlybbadF/"
+    },
+    "Everton": {
+        "team_id": "btdw04558",
+        "team_url": "https://www.flashscore.com/team/everton/KluSTr9s/"
+    },
+    "Burnley": {
+        "team_id": "mfpi99689",
+        "team_url": "https://www.flashscore.com/team/burnley/z3dmTMMO/"
+    },
+    "Sheffield Utd": {
+        "team_id": "jzzu90848",
+        "team_url": "https://www.flashscore.com/team/sheffield-utd/MeKPSerA/"
+    }
+}

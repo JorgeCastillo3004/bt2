@@ -1,0 +1,12 @@
+{
+    "FOOTBALL": {
+        "M3": {
+            "sport": "FOOTBALL",
+            "league": "QATAR_QSL",
+            "team_name": "Umm-Salal"
+        },
+        "M4": {
+            "league": "ARGENTINA_Copa de la Liga Profesional"
+        }
+    }
+}
