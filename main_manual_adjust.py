@@ -44,9 +44,8 @@ def main():
 	dict_sports = load_json('check_points/sports_url_m2.json')
 	
 	if main_extract_news_enable:
-		main_extract_news(driver, ["FOOTBALL", "TENNIS", "BASKETBALL", "FEATURES", "AMERICAN_SPORTS",  "GOLF",
-					"MOTORSPORT", "HOCKEY", "RUGBY_UNION", "COMBAT_SPORTS"], MAX_OLDER_DATE_ALLOWED = 30)
-		
+		main_extract_news(driver, ["MOTORSPORT", "HOCKEY", "RUGBY_UNION", "COMBAT_SPORTS"], MAX_OLDER_DATE_ALLOWED = 30)
+		# "FOOTBALL", "TENNIS", "BASKETBALL", "FEATURES", "AMERICAN_SPORTS",  "GOLF",Ready
 	if create_leagues_flag:
 		create_leagues(driver, ["FOOTBALL", "BASKETBALL", "HOCKEY"]) #, "GOLF", "AM._FOOTBALL", "BASEBALL"   READY: ["HOCKEY","BASKETBALL", "AM._FOOTBALL", "BASEBALL"]
 
