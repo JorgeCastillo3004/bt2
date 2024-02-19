@@ -79,54 +79,54 @@ cur = con.cursor()
 cur.execute(query)
 con.commit()
 
-# print("Delete all from league_team ")
-# query = "DELETE FROM league_team;"
-# cur = con.cursor()
-# cur.execute(query)
-# con.commit()
+print("Delete all from league_team ")
+query = "DELETE FROM league_team;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
 
-# print("Delete all from team_players_entity")
-# query = "DELETE FROM team_players_entity;"
-# cur = con.cursor()
-# cur.execute(query)
-# con.commit()
+print("Delete all from team_players_entity")
+query = "DELETE FROM team_players_entity;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
 
-# print("Delete all from player")
-# query = "DELETE FROM player;"
-# cur = con.cursor()
-# cur.execute(query)
-# con.commit()
+print("Delete all from player")
+query = "DELETE FROM player;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
 
-# print("Delete all from season ")
-# query = "DELETE FROM season;"
-# cur = con.cursor()
-# cur.execute(query)
-# con.commit()
-
-
-# print("Delete all from league ")
-# query = "DELETE FROM league;"
-# cur = con.cursor()
-# cur.execute(query)
-# con.commit()
+print("Delete all from season ")
+query = "DELETE FROM season;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
 
 
-# print("Delete all from team ")
-# query = "DELETE FROM team;"
-# cur = con.cursor()
-# cur.execute(query)
-# con.commit()
+print("Delete all from league ")
+query = "DELETE FROM league;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
 
-# print("Delete all from sport ")
-# query = "DELETE FROM sport;"
-# cur = con.cursor()
-# cur.execute(query)
-# con.commit()
 
-# print("Delete all from news ")
-# query = "DELETE FROM news;"
-# cur = con.cursor()
-# cur.execute(query)
-# con.commit()
+print("Delete all from team ")
+query = "DELETE FROM team;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
+
+print("Delete all from sport ")
+query = "DELETE FROM sport;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
+
+print("Delete all from news ")
+query = "DELETE FROM news;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
 
 cur.close()
