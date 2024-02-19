@@ -239,13 +239,8 @@ def main_extract_news(driver, list_sports, MAX_OLDER_DATE_ALLOWED = 31):
 	for sport_name in list_sports:
 		news_url = dict_url_news[sport_name]	
 		# 	TITLE SECTION PRINT
-		print_section("NEWS: {}".format(sport_name), space_ = 50)
-		################################################################################
-		#			 				DRIVER CREATION AND LOGIN 						   #
-		################################################################################
-		# driver = launch_navigator('https://www.flashscore.com', database_enable)
-		# login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
-		################################################################################
+		print_section("NEWS: {}".format(sport_name), space_ = 50)		
+		
 		# WAIT UNTIL LOAD PAGE
 		print(news_url)
 		wait_update_page(driver, news_url, "section__mainTitle")

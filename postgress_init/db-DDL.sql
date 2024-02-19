@@ -16,7 +16,7 @@ create table news
 (
     news_id      varchar(40) not null
         primary key,
-    news_content varchar(30000),
+    news_content varchar(40000),
     image        varchar(255),
     published    timestamp(6),
     news_summary varchar(8196),
@@ -41,16 +41,15 @@ create table player
 alter table player
     owner to wohhu;
 
-create table season
-(
-    season_id    varchar(40) not null
-        primary key,
-    season_name  varchar(35),
-    season_end   date,
-    season_start date,
-    league_id    varchar(40) not null
-        constraint fks8kd4aueryljws3a8kj228jvm
-            references
+CREATE TABLE season (
+    season_id    VARCHAR(40) NOT NULL PRIMARY KEY,
+    season_name  VARCHAR(35),
+    season_end   DATE,
+    season_start DATE,
+    league_id    VARCHAR(40) NOT NULL,
+    CONSTRAINT fk_league_id
+        FOREIGN KEY (league_id)
+        REFERENCES league (league_id)
 );
 
 alter table season
