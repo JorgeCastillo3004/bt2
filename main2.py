@@ -44,7 +44,7 @@ def main_live():
 
 	old_execution_schedule_s7 = '*'
 	section_schedule = update_data()
-	while True:
+	while False:
 
 		# new_execution_schedule_s7 = section_schedule['LIVE_SECTION']['TIME']
 		# print("Main live time: ", new_execution_schedule_s7)
