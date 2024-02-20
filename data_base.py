@@ -157,7 +157,7 @@ def get_dict_league_ready(sport_id = 'TENNIS'):
 ######################################## FUNCTIONS RELATED TO MATCHS ########################################
 def save_math_info(dict_match):
 	print("dict_match: ", dict_match['statistic'])
-	for key, value in dict_matchs.items():
+	for key, value in dict_match.items():
 		print(key, len(value))
 	query = "INSERT INTO match VALUES(%(match_id)s, %(match_country)s, %(end_time)s,\
 	 %(match_date)s, %(name)s, %(place)s, %(start_time)s, %(league_id)s,\
