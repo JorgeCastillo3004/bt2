@@ -158,10 +158,13 @@ def get_dict_league_ready(sport_id = 'TENNIS'):
 def save_math_info(dict_match):
 	print("dict_match: ", dict_match['statistic'])
 	for key, value in dict_match.items():
-		print(key, len(value))
+		try:
+			print(key, len(value))
+		except:
+			print(key, value)
 	query = "INSERT INTO match VALUES(%(match_id)s, %(match_country)s, %(end_time)s,\
-	 %(match_date)s, %(name)s, %(place)s, %(start_time)s, %(league_id)s,\
-	  %(rounds)s ,%(season_id)s,  %(status)s, %(stadium_id)s, %(statistic)s)"
+	 %(match_date)s, %(name)s, %(place)s, %(start_time)s, %(rounds)s, %(season_id)s, \
+	     %(status)s, %(statistic)s, %(league_id)s, %(stadium_id)s)"
 	cur = con.cursor()
 	cur.execute(query, dict_match)
 	con.commit()
