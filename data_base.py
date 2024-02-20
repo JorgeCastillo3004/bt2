@@ -159,7 +159,7 @@ def save_math_info(dict_match):
 	print("dict_match: ", dict_match['statistic'])
 	for key, value in dict_match.items():
 		try:
-			print(key, len(value))
+			print(key, len(value), value)
 		except:
 			print(key, value)
 	query = "INSERT INTO match VALUES(%(match_id)s, %(match_country)s, %(end_time)s,\
