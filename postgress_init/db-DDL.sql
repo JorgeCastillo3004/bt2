@@ -16,7 +16,7 @@ create table news
 (
     news_id      varchar(40) not null
         primary key,
-    news_content varchar(40000),
+    news_content varchar(45000),
     image        varchar(255),
     published    timestamp(6),
     news_summary varchar(8196),
@@ -41,15 +41,16 @@ create table player
 alter table player
     owner to wohhu;
 
-CREATE TABLE season (
-    season_id    VARCHAR(40) NOT NULL PRIMARY KEY,
-    season_name  VARCHAR(35),
-    season_end   DATE,
-    season_start DATE,
-    league_id    VARCHAR(40) NOT NULL,
-    CONSTRAINT fk_league_id
-        FOREIGN KEY (league_id)
-        REFERENCES league (league_id)
+create table season
+(
+    season_id    varchar(40) not null
+        primary key,
+    season_name  varchar(35),
+    season_end   date,
+    season_start date,
+    league_id    varchar(40) not null
+        constraint fks8kd4aueryljws3a8kj228jvm
+            references
 );
 
 alter table season
@@ -107,113 +108,112 @@ create table tournament
 alter table tournament
     owner to wohhu;
 
-CREATE TABLE team (
-    team_id       VARCHAR(40) NOT NULL PRIMARY KEY,
-    team_country  VARCHAR(60),
-    team_desc     VARCHAR(255),
-    team_logo     VARCHAR(128),
-    team_name     VARCHAR(128),
-    sport_id      VARCHAR(40) NOT NULL,
-    CONSTRAINT fk_sport_id
-        FOREIGN KEY (sport_id)
-        REFERENCES sport (sport_id)
+create table team
+(
+    team_id       varchar(40)  not null
+        primary key,
+    team_country  varchar(60),
+    team_desc     varchar(255),
+    team_logo     varchar(128),
+    team_name     varchar(128),
+    sport_id      varchar(40)  not null
+        constraint fkk1sdogt0khby5wtn58a2j1rdn
+            references sport
 );
 
 alter table team
     owner to wohhu;
 
-CREATE TABLE league_team (
-    instance_id   VARCHAR(40) NOT NULL PRIMARY KEY,
-    team_meta     VARCHAR(255),
-    team_position INTEGER,
-    league_id     VARCHAR(40) NOT NULL,
-    season_id     VARCHAR(40) NOT NULL,
-    team_id       VARCHAR(40) NOT NULL,
-    CONSTRAINT fk_league_id
-        FOREIGN KEY (league_id)
-        REFERENCES league (league_id),
-    CONSTRAINT fk_season_id
-        FOREIGN KEY (season_id)
-        REFERENCES season (season_id),
-    CONSTRAINT fk_team_id
-        FOREIGN KEY (team_id)
-        REFERENCES team (team_id)
+create table league_team
+(
+    instance_id   varchar(40) not null
+        primary key,
+    team_meta     varchar(255),
+    team_position integer,
+    league_id     varchar(40) not null
+        constraint fk42nqg93tcmnm42c9jjvl4nr4k
+            references league,
+    season_id     varchar(40) not null
+        constraint fkjaeynp5h4dwswmu65ad73sqcy
+            references season,
+    team_id       varchar(40) not null
+        constraint fkwwjm5nxr1jrlklf5l0aqum7k
+            references team
 );
 
 alter table league_team
     owner to wohhu;
 
-CREATE TABLE match (
-    match_id      VARCHAR(255) NOT NULL PRIMARY KEY,
-    match_country VARCHAR(80),
-    end_time      TIME(6),
-    match_date    DATE,
-    name          VARCHAR(70),
-    place         VARCHAR(128),
-    start_time    TIME(6),
-    rounds        VARCHAR(40),
-    season_id     VARCHAR(40),
-    status        VARCHAR(40),
-    statistic     VARCHAR(1600),
-    league_id     VARCHAR(40),
-    CONSTRAINT fk_league_team
-        FOREIGN KEY (league_id)
-        REFERENCES league_team (instance_id),
-    stadium_id    VARCHAR(255),
-    CONSTRAINT fk_stadium
-        FOREIGN KEY (stadium_id)
-        REFERENCES stadium (stadium_id)
+create table match
+(
+    match_id      varchar(255) not null
+        primary key,
+    match_country varchar(80),
+    end_time      time(6),
+    match_date    date,
+    name          varchar(70),
+    place         varchar(128),
+    start_time    time(6),    
+    rounds     varchar(40),
+    season_id     varchar(40),    
+    status     varchar(40),
+    statistic     varchar(1600)
+    league_id     varchar(40),
+    constraint fk524ycxnj02ukjb4gghuqh1rod
+        references league_team,
+    stadium_id    varchar(255)
+        constraint fkojlcqppbrrr1l8kd4b8ta35sp
+            references stadium
+
 );
 
 alter table match
     owner to wohhu;
 
-CREATE TABLE match_detail (
-    match_detail_id VARCHAR(255) NOT NULL PRIMARY KEY,
-    home            BOOLEAN,
-    visitor         BOOLEAN,
-    match_id        VARCHAR(255),
-    team_id         VARCHAR(40),
-    CONSTRAINT fk_match
-        FOREIGN KEY (match_id)
-        REFERENCES match (match_id),
-    CONSTRAINT fk_team
-        FOREIGN KEY (team_id)
-        REFERENCES team (team_id)
+create table match_detail
+(
+    match_detail_id varchar(255) not null
+        primary key,
+    home            boolean,
+    visitor         boolean,
+    match_id        varchar(255)
+        constraint fkd9wrmrjlb1sydqo42dmpb1xxo
+            references match,
+    team_id         varchar(40)
+        constraint fk5u2jk9e91vv1s31vidgjpnw2v
+            references team
 );
 
 alter table match_detail
     owner to wohhu;
 
-CREATE TABLE score_entity (
-    score_id        VARCHAR(40)      NOT NULL PRIMARY KEY,
-    points          DOUBLE PRECISION NOT NULL,
-    match_detail_id VARCHAR(255),
-    CONSTRAINT fk_match_detail
-        FOREIGN KEY (match_detail_id)
-        REFERENCES match_detail (match_detail_id)
+create table score_entity
+(
+    score_id        varchar(40)      not null
+        primary key,
+    points          double precision not null,
+    match_detail_id varchar(255)
+        constraint fk6dpior2ifpl309rmt20x2qowo
+            references match_detail
 );
 
 alter table score_entity
     owner to wohhu;
-    
-CREATE TABLE team_players_entity (
-    player_meta VARCHAR(255),
-    season_id   VARCHAR(40) NOT NULL,
-    team_id     VARCHAR(40) NOT NULL,
-    player_id   VARCHAR(40) NOT NULL,
-    PRIMARY KEY (player_id, season_id, team_id),
-    CONSTRAINT fk_season
-        FOREIGN KEY (season_id)
-        REFERENCES season (season_id),
-    CONSTRAINT fk_team
-        FOREIGN KEY (team_id)
-        REFERENCES team (team_id),
-    CONSTRAINT fk_player
-        FOREIGN KEY (player_id)
-        REFERENCES player (player_id)
-);
 
+create table team_players_entity
+(
+    player_meta varchar(255),
+    season_id   varchar(40) not null
+        constraint fkh0a065ra217hajcrw429cueq1
+            references season,
+    team_id     varchar(40) not null
+        constraint fk91sdygsi6rxsivpcxjwfut803
+            references team,
+    player_id   varchar(40) not null
+        constraint fkr42bm4vlwicexlqtxjxaexgs9
+            references player,
+    primary key (player_id, season_id, team_id)
+);
 
 alter table team_players_entity
     owner to wohhu;
