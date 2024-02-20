@@ -16,16 +16,16 @@ if os.path.isfile("check_points/leagues_info.json"):
 if os.path.isfile('check_points/global_check_point.json'):
 	os.remove('check_points/global_check_point.json')
 
-if os.path.isfile('check_points/last_saved_news.json'):
-	os.remove('check_points/last_saved_news.json')
+# if os.path.isfile('check_points/last_saved_news.json'):
+# 	os.remove('check_points/last_saved_news.json')
 
 files = os.listdir('check_points/leagues_season/')
 
 
 shutil.rmtree('check_points/leagues_season/')
 print('Remove folder: check_points/leagues_season/')
-shutil.rmtree('check_points/news/')
-print('Remove folder: check_points/news/')
+# shutil.rmtree('check_points/news/')
+# print('Remove folder: check_points/news/')
 # print("Files and folder removed: ")
 # # Iterate over each file and remove it
 # for file_name in files:
@@ -123,10 +123,10 @@ cur = con.cursor()
 cur.execute(query)
 con.commit()
 
-print("Delete all from news ")
-query = "DELETE FROM news;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
+# print("Delete all from news ")
+# query = "DELETE FROM news;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
 
 cur.close()
