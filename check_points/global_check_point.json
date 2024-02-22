@@ -1,0 +1,10 @@
+{
+    "HOCKEY": {},
+    "BASKETBALL": {
+        "M3": {
+            "sport": "BASKETBALL",
+            "league": "BRAZIL_NBB",
+            "team_name": "Flamengo"
+        }
+    }
+}
