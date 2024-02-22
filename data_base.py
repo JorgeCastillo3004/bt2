@@ -1,15 +1,14 @@
 import psycopg2
 from common_functions import load_json
 from unidecode import unidecode
-# CONFIG = load_json('check_points/CONFIG.json')
-# database_enable = CONFIG['DATA_BASE']
+
 
 def getdb():
 	return psycopg2.connect(
 				host="localhost",
 				user="wohhu",
 				password="caracas123",
-		dbname='sports_db',
+		dbname='sports_db2',
 		)
 
 def save_news_database(dict_news):	

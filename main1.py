@@ -26,13 +26,9 @@ from milestone4 import *
 from milestone5 import *
 from milestone6 import *
 
-CONFIG = load_json('check_points/CONFIG.json')
-database_enable = CONFIG['DATA_BASE']
-if database_enable:
-	con = getdb()
 
 def main_others():
-	driver = launch_navigator('https://www.flashscore.com', database_enable)
+	driver = launch_navigator('https://www.flashscore.com', headless = False)
 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
 	day_execution_s1 = -1
 	day_execution_s2 = -1
@@ -129,10 +125,7 @@ def main_others():
 
 		section_schedule = update_data()
 		print("o-", end='')
-		time.sleep(1)	
+		time.sleep(1)
 
-# if __name__ == "__main__":	
-# 	main_others(driver)
-# 	if database_enable:
-# 		con.close()
-# 	driver.quit()
+if __name__ == "__main__":	
+	main_others()

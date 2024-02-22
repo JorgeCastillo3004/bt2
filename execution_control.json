@@ -5,10 +5,10 @@
 							  "HOCKEY"],
 					"MAX_OLDER_DATE_ALLOWED":31
 					},
-	"CREATE_LEAGUES": {"TIME":"weekly|saturday|13:16:00",
+	"CREATE_LEAGUES": {"TIME":"weekly|tuesday|12:35:00",
 						"SPORTS": ["HOCKEY", "BASKETBALL"]},
 
-	"CREATE_TEAMS": {"TIME":"weekly|thursday|23:55:00", 
+	"CREATE_TEAMS": {"TIME":"weekly|tuesday|12:50:00", 
 					"SPORTS": ["HOCKEY", "BASKETBALL"]},
 
 	"GET_RESULTS": {"TIME":"weekly|monday|14:16:30", 

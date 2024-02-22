@@ -1,0 +1,80 @@
+{
+    "0": {
+        "match_id": "ftgc93091",
+        "match_date": "13.10. 12:00\nPen",
+        "start_time": "",
+        "end_time": "",
+        "name": "Olomouc-Mountfield HK",
+        "home": "Olomouc",
+        "visitor": "Mountfield HK",
+        "home_result": "1",
+        "visitor_result": "2",
+        "link_details": "https://www.flashscore.com/match/UeIoJsW4/#/match-summary/match-summary",
+        "place": ""
+    },
+    "1": {
+        "match_id": "etti90042",
+        "match_date": "13.10. 12:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Pardubice-Mlada Boleslav",
+        "home": "Pardubice",
+        "visitor": "Mlada Boleslav",
+        "home_result": "3",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/GCKcGuGN/#/match-summary/match-summary",
+        "place": ""
+    },
+    "2": {
+        "match_id": "aadw90152",
+        "match_date": "13.10. 11:30\nPen",
+        "start_time": "",
+        "end_time": "",
+        "name": "Ceske Budejovice-Karlovy Vary",
+        "home": "Ceske Budejovice",
+        "visitor": "Karlovy Vary",
+        "home_result": "2",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/xMLgHL0H/#/match-summary/match-summary",
+        "place": ""
+    },
+    "3": {
+        "match_id": "nwka92540",
+        "match_date": "13.10. 11:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Litvinov-Sparta Prague",
+        "home": "Litvinov",
+        "visitor": "Sparta Prague",
+        "home_result": "4",
+        "visitor_result": "2",
+        "link_details": "https://www.flashscore.com/match/YTOxL31h/#/match-summary/match-summary",
+        "place": ""
+    },
+    "4": {
+        "match_id": "zbem05337",
+        "match_date": "13.10. 11:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Vitkovice-Liberec",
+        "home": "Vitkovice",
+        "visitor": "Liberec",
+        "home_result": "5",
+        "visitor_result": "2",
+        "link_details": "https://www.flashscore.com/match/8nHkI1oB/#/match-summary/match-summary",
+        "place": ""
+    },
+    "5": {
+        "match_id": "fcja90030",
+        "match_date": "12.10. 11:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Plzen-Kometa Brno",
+        "home": "Plzen",
+        "visitor": "Kometa Brno",
+        "home_result": "1",
+        "visitor_result": "2",
+        "link_details": "https://www.flashscore.com/match/byA2FaVT/#/match-summary/match-summary",
+        "place": ""
+    }
+}

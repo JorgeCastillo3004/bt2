@@ -113,8 +113,7 @@ def update_lives_matchs(driver):
 		# All that in infine loop, controlled by execution control file.
 		results = get_match_by_day() # get match for current date.
 		dict_pending = build_dict_match(results) # buil dict_pending, by sport and match
-		print("Sports keys: ", dict_pending.keys())
-		
+		print("Sports keys: ", dict_pending.keys())		
 		dict_finished = {}
 		local_time_naive = datetime.now()
 		utc_time_naive = datetime.utcnow()
@@ -194,7 +193,8 @@ def update_lives_matchs(driver):
 			elapsed_time = time.time() - start_time
 			remaining_time = max(0, duration - elapsed_time)
 			dict_pending = dict_pending_copy
-			
+			if len(dict_pending) == 0:
+				time.sleep(duration)
 			display_dynamic_value(remaining_time)
 			# Clear the output of the current cell
 			clear_output(wait=True)

@@ -3,6 +3,7 @@ from datetime import date, timedelta
 from datetime import datetime
 import argparse
 from common_functions import load_json
+from data_base import getdb
 import os
 import shutil
 
@@ -43,17 +44,7 @@ print('Remove folder: check_points/leagues_season/')
 #         os.remove(file_path)
 #         print(f"Removed {file_path}")
 
-
-def getdb():
-	return psycopg2.connect(
-			host="localhost",
-			user="wohhu",
-			password="caracas123",
-	dbname='sports_db',
-	)
-
 con = getdb()
-
 
 print("Delete all from score_entity ")
 query = "DELETE FROM score_entity;"

@@ -37,38 +37,39 @@ def main():
 	main_extract_news_enable = False  	# 1
 	create_leagues_flag = False 	    # 2
 	teams_creation_flag = False	  	    # 3
-	results_extraction_flag = True		# 4
-	fixture_extraction_flag = True		# 5
-	players_flag = False 				# 6	
-	live_games_flag = False	
+	results_extraction_flag = False		# 4
+	fixture_extraction_flag = False		# 5
+	players_flag = False 				# 6
+	live_games_flag = True	
 	dict_sports = load_json('check_points/sports_url_m2.json')
 	
 	if main_extract_news_enable:
 		main_extract_news(driver, ["MOTORSPORT", "HOCKEY", "RUGBY_UNION", "COMBAT_SPORTS"], MAX_OLDER_DATE_ALLOWED = 30)
 		# "FOOTBALL", "TENNIS", "BASKETBALL", "FEATURES", "AMERICAN_SPORTS",  "GOLF",Ready
 	if create_leagues_flag:
-		create_leagues(driver, ["FOOTBALL", "BASKETBALL", "HOCKEY"]) #, "GOLF", "AM._FOOTBALL", "BASEBALL"   READY: ["HOCKEY","BASKETBALL", "AM._FOOTBALL", "BASEBALL"]
+		create_leagues(driver, ["HOCKEY"]) #, "GOLF", "AM._FOOTBALL", "BASEBALL"   READY: ["HOCKEY","BASKETBALL", "AM._FOOTBALL", "BASEBALL"]
 
 	if teams_creation_flag:
-		teams_creation(driver, ["FOOTBALL", "BASKETBALL", "HOCKEY"]) # , "GOLF", "AM._FOOTBALL", "BASEBALL"
+		teams_creation(driver, ["HOCKEY"]) # , "GOLF", "AM._FOOTBALL", "BASEBALL"
 
 	if results_extraction_flag:
-		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL", "HOCKEY"], name_section = 'results')
+		results_fixtures_extraction(driver, ["HOCKEY"], name_section = 'results')
 
 	if fixture_extraction_flag:
-		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL", "HOCKEY"], name_section = 'fixtures')
+		results_fixtures_extraction(driver, ["HOCKEY"], name_section = 'fixtures')
 
 	if players_flag:
-		players(["FOOTBALL", "TENNIS", "BASKETBALL", "HOCKEY","BASEBALL","BOXING", "VOLLEYBALL"])
+		players(driver, ["HOCKEY"])
 
 	if live_games_flag:
-		live_games(driver, ["FOOTBALL", "TENNIS", "BASKETBALL", "HOCKEY",
-					  "BASEBALL","BOXING", "VOLLEYBALL"])
+		update_lives_matchs(driver)
+		# live_games(driver, ["FOOTBALL", "TENNIS", "BASKETBALL", "HOCKEY",
+		# 			  "BASEBALL","BOXING", "VOLLEYBALL"])
 
 if __name__ == "__main__":  	
-	driver = launch_navigator('https://www.flashscore.com', database_enable)
+	driver = launch_navigator('https://www.flashscore.com', headless = False)
 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
 	main()
-	if database_enable:
-		con.close()
+	# if database_enable:
+	con.close()
 	# driver.quit()

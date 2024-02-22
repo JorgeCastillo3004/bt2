@@ -1,0 +1,93 @@
+{
+    "0": {
+        "match_id": "nbkj00206",
+        "match_date": "17.09. 11:45\nPen",
+        "start_time": "",
+        "end_time": "",
+        "name": "Trinec-Sparta Prague",
+        "home": "Trinec",
+        "visitor": "Sparta Prague",
+        "home_result": "2",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/IDzjfhRO/#/match-summary/match-summary",
+        "place": ""
+    },
+    "1": {
+        "match_id": "nbki00929",
+        "match_date": "17.09. 11:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Litvinov-Plzen",
+        "home": "Litvinov",
+        "visitor": "Plzen",
+        "home_result": "4",
+        "visitor_result": "2",
+        "link_details": "https://www.flashscore.com/match/fB50EeCt/#/match-summary/match-summary",
+        "place": ""
+    },
+    "2": {
+        "match_id": "gxcm02884",
+        "match_date": "17.09. 11:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Ceske Budejovice-Olomouc",
+        "home": "Ceske Budejovice",
+        "visitor": "Olomouc",
+        "home_result": "3",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/KIEYIy4P/#/match-summary/match-summary",
+        "place": ""
+    },
+    "3": {
+        "match_id": "hhqz08358",
+        "match_date": "17.09. 10:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Kladno-Pardubice",
+        "home": "Kladno",
+        "visitor": "Pardubice",
+        "home_result": "1",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/WdYwcfs6/#/match-summary/match-summary",
+        "place": ""
+    },
+    "4": {
+        "match_id": "sjez93756",
+        "match_date": "17.09. 10:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Mlada Boleslav-Vitkovice",
+        "home": "Mlada Boleslav",
+        "visitor": "Vitkovice",
+        "home_result": "2",
+        "visitor_result": "4",
+        "link_details": "https://www.flashscore.com/match/AmXsdEdC/#/match-summary/match-summary",
+        "place": ""
+    },
+    "5": {
+        "match_id": "cgkj97084",
+        "match_date": "17.09. 10:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Mountfield HK-Liberec",
+        "home": "Mountfield HK",
+        "visitor": "Liberec",
+        "home_result": "5",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/vNyneYBI/#/match-summary/match-summary",
+        "place": ""
+    },
+    "6": {
+        "match_id": "tusq91727",
+        "match_date": "17.09. 09:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Karlovy Vary-Kometa Brno",
+        "home": "Karlovy Vary",
+        "visitor": "Kometa Brno",
+        "home_result": "4",
+        "visitor_result": "0",
+        "link_details": "https://www.flashscore.com/match/lY44DFRn/#/match-summary/match-summary",
+        "place": ""
+    }
+}

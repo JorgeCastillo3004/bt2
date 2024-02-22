@@ -1,0 +1,93 @@
+{
+    "0": {
+        "match_id": "fyev04834",
+        "match_date": "21.01. 13:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Pardubice-Trinec",
+        "home": "Pardubice",
+        "visitor": "Trinec",
+        "home_result": "5",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/tlD8rSZd/#/match-summary/match-summary",
+        "place": ""
+    },
+    "1": {
+        "match_id": "hpds96148",
+        "match_date": "21.01. 12:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Kometa Brno-Liberec",
+        "home": "Kometa Brno",
+        "visitor": "Liberec",
+        "home_result": "4",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/tCeeZNdq/#/match-summary/match-summary",
+        "place": ""
+    },
+    "2": {
+        "match_id": "klpo02691",
+        "match_date": "21.01. 12:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Olomouc-Mlada Boleslav",
+        "home": "Olomouc",
+        "visitor": "Mlada Boleslav",
+        "home_result": "7",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/S4FKuQJF/#/match-summary/match-summary",
+        "place": ""
+    },
+    "3": {
+        "match_id": "ymfv08787",
+        "match_date": "21.01. 11:30\nAOT",
+        "start_time": "",
+        "end_time": "",
+        "name": "Plzen-Mountfield HK",
+        "home": "Plzen",
+        "visitor": "Mountfield HK",
+        "home_result": "2",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/OW8Tw4lS/#/match-summary/match-summary",
+        "place": ""
+    },
+    "4": {
+        "match_id": "kptz90695",
+        "match_date": "21.01. 11:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Kladno-Ceske Budejovice",
+        "home": "Kladno",
+        "visitor": "Ceske Budejovice",
+        "home_result": "0",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/lEGGt649/#/match-summary/match-summary",
+        "place": ""
+    },
+    "5": {
+        "match_id": "uuia01752",
+        "match_date": "21.01. 11:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Sparta Prague-Karlovy Vary",
+        "home": "Sparta Prague",
+        "visitor": "Karlovy Vary",
+        "home_result": "1",
+        "visitor_result": "4",
+        "link_details": "https://www.flashscore.com/match/fiHCsnk3/#/match-summary/match-summary",
+        "place": ""
+    },
+    "6": {
+        "match_id": "maml03251",
+        "match_date": "21.01. 11:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Vitkovice-Litvinov",
+        "home": "Vitkovice",
+        "visitor": "Litvinov",
+        "home_result": "5",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/ptAPvpZL/#/match-summary/match-summary",
+        "place": ""
+    }
+}

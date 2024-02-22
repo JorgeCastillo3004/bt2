@@ -12,28 +12,6 @@ from common_functions import *
 # from common_functions import utc_time_naive
 from data_base import *
 
-# import argparse
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--db', type=bool, default=False)
-# args = parser.parse_args()
-# database_enable = args.db
-
-# print("Type: ", type(database_enable))
-
-# print("database_enable: ", database_enable)
-# if database_enable:
-# 	print("Write on db activate")
-# else:
-# 	print("Don't write in database")
-
-# def getdb():
-# 	return psycopg2.connect(
-# 				host="localhost",
-# 				user="wohhu",
-# 				password="caracas123",
-# 		dbname='sports_db',
-# 		)
-
 def get_sports_links(driver):
 	wait = WebDriverWait(driver, 10)
 	buttonmore = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'menuMinority__arrow')))
@@ -294,9 +272,8 @@ def create_leagues(driver, list_sports):
 		#		CHECK IF SPORT WAS SAVED PREVIOUSLY						  #
 		###################################################################
 		if not sport_name in dict_sport_id.keys():				
-			sport_dict, sport_id = create_sport_dict(sport_mode_dict[sport_name]['mode'], sport_name)
-			if database_enable:					
-				save_sport_database(sport_dict)
+			sport_dict, sport_id = create_sport_dict(sport_mode_dict[sport_name]['mode'], sport_name)			
+			save_sport_database(sport_dict)
 		else:
 			sport_id = dict_sport_id[sport_name]
 		###################################################################
@@ -369,8 +346,7 @@ def create_leagues(driver, list_sports):
 				if len(list_seasons) == 0:
 					enable_save = True
 					print(" "*30, "SAVE NEW SEASON", league_info['season_id'])
-					if database_enable:
-						save_season_database(league_info) # UNCOMENT
+					save_season_database(league_info) # UNCOMENT
 
 				###################################################################
 				#			SECTION CHECK SEASON SAVED PREVIUSLY				  #
@@ -410,17 +386,3 @@ def initial_settings_m2(driver):
 		for sport in dict_sports.keys():
 			dict_config_m2[sport] = False
 		save_check_point('check_points/CONFIG_M2.json', dict_config_m2)
-
-CONFIG = load_json('check_points/CONFIG.json')
-database_enable = CONFIG['DATA_BASE']
-if database_enable:
-	con = getdb()
-
-# if __name__ == "__main__":  	
-# 	driver = launch_navigator('https://www.flashscore.com', database_enable)
-# 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
-# 	initial_settings_m2(driver)
-# 	main_m2(driver, flag_news = False)
-# 	if database_enable:
-# 		con.close()
-# 	driver.quit()

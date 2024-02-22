@@ -1,0 +1,67 @@
+{
+    "0": {
+        "match_id": "witu95721",
+        "match_date": "17.01. 13:30\nAOT",
+        "start_time": "",
+        "end_time": "",
+        "name": "Sparta Prague-Pardubice",
+        "home": "Sparta Prague",
+        "visitor": "Pardubice",
+        "home_result": "1",
+        "visitor_result": "2",
+        "link_details": "https://www.flashscore.com/match/xbkXfs7T/#/match-summary/match-summary",
+        "place": ""
+    },
+    "1": {
+        "match_id": "raxj04740",
+        "match_date": "17.01. 13:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Kometa Brno-Litvinov",
+        "home": "Kometa Brno",
+        "visitor": "Litvinov",
+        "home_result": "3",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/Uksaj1Fp/#/match-summary/match-summary",
+        "place": ""
+    },
+    "2": {
+        "match_id": "rysy07053",
+        "match_date": "17.01. 13:00\nAOT",
+        "start_time": "",
+        "end_time": "",
+        "name": "Mountfield HK-Mlada Boleslav",
+        "home": "Mountfield HK",
+        "visitor": "Mlada Boleslav",
+        "home_result": "2",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/OlOkDOMc/#/match-summary/match-summary",
+        "place": ""
+    },
+    "3": {
+        "match_id": "pjya09084",
+        "match_date": "17.01. 13:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Olomouc-Karlovy Vary",
+        "home": "Olomouc",
+        "visitor": "Karlovy Vary",
+        "home_result": "3",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/8tt3kLUj/#/match-summary/match-summary",
+        "place": ""
+    },
+    "4": {
+        "match_id": "mndj92936",
+        "match_date": "17.01. 12:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Plzen-Ceske Budejovice",
+        "home": "Plzen",
+        "visitor": "Ceske Budejovice",
+        "home_result": "4",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/b7jTeNiN/#/match-summary/match-summary",
+        "place": ""
+    }
+}

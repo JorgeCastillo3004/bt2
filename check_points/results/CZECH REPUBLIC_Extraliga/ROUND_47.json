@@ -1,0 +1,80 @@
+{
+    "0": {
+        "match_id": "udxu97346",
+        "match_date": "03.01. 13:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Sparta Prague-Vitkovice",
+        "home": "Sparta Prague",
+        "visitor": "Vitkovice",
+        "home_result": "2",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/tMddEPyG/#/match-summary/match-summary",
+        "place": ""
+    },
+    "1": {
+        "match_id": "nznv97686",
+        "match_date": "03.01. 13:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Liberec-Ceske Budejovice",
+        "home": "Liberec",
+        "visitor": "Ceske Budejovice",
+        "home_result": "4",
+        "visitor_result": "1",
+        "link_details": "https://www.flashscore.com/match/jenW7NEq/#/match-summary/match-summary",
+        "place": ""
+    },
+    "2": {
+        "match_id": "houj06302",
+        "match_date": "03.01. 13:00",
+        "start_time": "",
+        "end_time": "",
+        "name": "Mountfield HK-Kladno",
+        "home": "Mountfield HK",
+        "visitor": "Kladno",
+        "home_result": "4",
+        "visitor_result": "2",
+        "link_details": "https://www.flashscore.com/match/KCe0DqiM/#/match-summary/match-summary",
+        "place": ""
+    },
+    "3": {
+        "match_id": "devy95314",
+        "match_date": "03.01. 12:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Litvinov-Karlovy Vary",
+        "home": "Litvinov",
+        "visitor": "Karlovy Vary",
+        "home_result": "1",
+        "visitor_result": "6",
+        "link_details": "https://www.flashscore.com/match/Op2iF5M9/#/match-summary/match-summary",
+        "place": ""
+    },
+    "4": {
+        "match_id": "xnwb98225",
+        "match_date": "03.01. 12:30\nPen",
+        "start_time": "",
+        "end_time": "",
+        "name": "Mlada Boleslav-Trinec",
+        "home": "Mlada Boleslav",
+        "visitor": "Trinec",
+        "home_result": "2",
+        "visitor_result": "3",
+        "link_details": "https://www.flashscore.com/match/EZf4C36S/#/match-summary/match-summary",
+        "place": ""
+    },
+    "5": {
+        "match_id": "gmzh94384",
+        "match_date": "03.01. 12:30",
+        "start_time": "",
+        "end_time": "",
+        "name": "Plzen-Olomouc",
+        "home": "Plzen",
+        "visitor": "Olomouc",
+        "home_result": "8",
+        "visitor_result": "0",
+        "link_details": "https://www.flashscore.com/match/CAzu61qd/#/match-summary/match-summary",
+        "place": ""
+    }
+}

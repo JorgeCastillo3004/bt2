@@ -10,7 +10,6 @@ import shutil
 from common_functions import *
 from data_base import *
 
-
 def buil_dict_map_values(driver):
 	block = driver.find_element(By.CLASS_NAME, 'ui-table__header')
 	cell_names = block.find_elements(By.XPATH,'.//div')
@@ -93,11 +92,10 @@ def navigate_through_teams(driver, sport_id, league_id, tournament_id, season_id
 
 			dict_team = get_teams_info_part2(driver, sport_id, league_id, season_id, team_info)			
 			dict_team['tournament_id'] = tournament_id
-			print("Save in database teams info")
-			if database_enable:				
-				save_team_info(dict_team)
-				dict_team['player_meta'] = ''
-				save_league_team_entity(dict_team)
+			print("Save in database teams info")			
+			save_team_info(dict_team)
+			dict_team['player_meta'] = ''
+			save_league_team_entity(dict_team)
 
 			squad_button = driver.find_element(By.CLASS_NAME, 'tabs__tab.squad')
 			squad_url = squad_button.get_attribute('href')
@@ -243,18 +241,17 @@ def teams_creation(driver, list_sports):
 								print("TEAM HAS BEEN SAVED PREVIOUSLY")
 								team_id = dict_teams_db[sport_id][team_country][team_name]['team_id']							
 							else:
-								print(" TEATM DON'T FOUND IN DATA_BASE")
-								if database_enable:
-									print("SEARCH IN DATA BASE BY COUNTRY AND NAME")
-									team_id_db = get_list_id_teams(sport_id, dict_team['team_country'], dict_team['team_name'])
-									if len(team_id_db) == 0:
-										print("TEAM CREATED AND SAVED IN DATA BASE")
-										save_team_info(dict_team)
-										save_league_team_entity(dict_team)
-										team_id = dict_team['team_id']
-									else:
-										print("TEAM HAS BEEN SAVED PREVIOUSLY")
-										team_id = team_id_db[0]
+								print(" TEATM DON'T FOUND IN DATA_BASE")								
+								print("SEARCH IN DATA BASE BY COUNTRY AND NAME")
+								team_id_db = get_list_id_teams(sport_id, dict_team['team_country'], dict_team['team_name'])
+								if len(team_id_db) == 0:
+									print("TEAM CREATED AND SAVED IN DATA BASE")
+									save_team_info(dict_team)
+									save_league_team_entity(dict_team)
+									team_id = dict_team['team_id']
+								else:
+									print("TEAM HAS BEEN SAVED PREVIOUSLY")
+									team_id = team_id_db[0]
 							print("Team id: ", team_name, team_id)
 							#####################################################################################
 							#      SAVE TEAM INFO IN DICT dict_country_league_season (one file by each league)  #
@@ -274,15 +271,3 @@ def teams_creation(driver, list_sports):
 			save_check_point('check_points/global_check_point.json', global_check_point)
 	# driver.quit()
 
-CONFIG = load_json('check_points/CONFIG.json')
-database_enable = CONFIG['DATA_BASE']
-if database_enable:
-	con = getdb()
-
-# if __name__ == "__main__":  	
-# 	driver = launch_navigator('https://www.flashscore.com', database_enable)
-# 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")	
-# 	main_m3(driver)
-# 	if database_enable:
-# 		con.close()
-# 	driver.quit()

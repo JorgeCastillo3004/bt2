@@ -28,15 +28,10 @@ from data_base import *
 from milestone7 import *
 from milestone8 import *
 
-CONFIG = load_json('check_points/CONFIG.json')
-database_enable = CONFIG['DATA_BASE']
-if database_enable:
-	con = getdb()
-
-
 def main_live():
-	driver = launch_navigator('https://www.flashscore.com', database_enable)
+	driver = launch_navigator('https://www.flashscore.com', headless = False)
 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")	
+	print("Section live...")
 	day_execution_s7 = -1
 	execute_ready_s7 = False
 
@@ -44,7 +39,7 @@ def main_live():
 
 	old_execution_schedule_s7 = '*'
 	section_schedule = update_data()
-	while False:
+	while True:
 
 		# new_execution_schedule_s7 = section_schedule['LIVE_SECTION']['TIME']
 		# print("Main live time: ", new_execution_schedule_s7)
@@ -64,9 +59,8 @@ def main_live():
 		# print("l-", end='')
 		# # print(stop)
 		# time.sleep(1)	
+	# driver.quit()
 
 if __name__ == "__main__":	
 	main_live()
-# 	if database_enable:
-# 		con.close()
-# 	driver.quit()
+	

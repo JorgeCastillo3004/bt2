@@ -197,7 +197,7 @@ def get_check_point(dict_players_ready, sport_id, country_league, team_name):
 		dict_players_ready[sport_id][country_league][team_name] = []
 	return dict_players_ready
 
-def players(list_sports):
+def players(driver, list_sports):
 	leagues_info_json = load_check_point('check_points/leagues_info.json')	
 	dict_sport_id = get_dict_sport_id()	# GET DICT SPORT FROM DATABASE
 	inverted_dict = {value: key for key, value in dict_sport_id.items()}
@@ -270,11 +270,7 @@ def players(list_sports):
 
 			#     ENEABLE SEARCH IF FILE EXIST AND ENABLE CHECK POIN    #
 			if os.path.isfile(path_leagues_teams_info) and enable_league:
-				#############################################################
-				# 				DRIVER CREATION AND LOGIN 					#
-				#############################################################
-				driver = launch_navigator('https://www.flashscore.com', database_enable)
-				login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
+				
 				#############################################################
 				print("Start extraction for league: ", country_league)
 				global_check_point[sport_name]['M6']['league'] = country_league
@@ -319,19 +315,8 @@ def players(list_sports):
 						navigate_through_players(driver, country_league, team_name, league_info['season_id'],\
 											 team_info['team_id'], list_squad, global_check_point, sport_name)
 						# global_check_point['M6'] = {'sport':sport_name, 'league':country_league, 'team_name':team_name}
-				driver.quit()
+				
 	del global_check_point[sport_name]['M6']
 	save_check_point('check_points/global_check_point.json', global_check_point)
 
-CONFIG = load_json('check_points/CONFIG.json')
-database_enable = CONFIG['DATA_BASE']
-if database_enable:
-	con = getdb()
 
-# if __name__ == "__main__":  	
-# 	driver = launch_navigator('https://www.flashscore.com', database_enable)
-# 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")	
-# 	main_m6(driver)
-# 	if database_enable:
-# 		con.close()
-# 	driver.quit()

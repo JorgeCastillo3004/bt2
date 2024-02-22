@@ -372,13 +372,12 @@ def save_participants_info(driver, player_links, sport_id, league_id, season_id,
 		if not team_name in list((dict_players_ready.keys() ) ):			
 			dict_players_ready[team_name] = {'team_id':player_dict['team_id']}
 		player_list = check_player_duplicates(player_dict['player_country'], player_dict['player_name'], player_dict['player_dob'])
-		
-		if database_enable:
-			if len(player_list) == 0:
-				save_player_info(player_dict) # player
-			save_team_info(player_dict) # team
-			save_team_players_entity(player_dict) # team_players_entity				
-			save_league_team_entity(player_dict) # league_team
+				
+		if len(player_list) == 0:
+			save_player_info(player_dict) # player
+		save_team_info(player_dict) # team
+		save_team_players_entity(player_dict) # team_players_entity				
+		save_league_team_entity(player_dict) # league_team
 		if len(player_list) != 0:
 			print("PLAYER PREVIOUSLY CREATED ")
 				
@@ -405,8 +404,7 @@ def save_participants_info(driver, player_links, sport_id, league_id, season_id,
 			name_ = player_dict['player_name']
 			if not name_ in list((dict_players_ready.keys() ) ):
 				dict_players_ready[name_] = {'team_id':player_dict['team_id']}
-				if database_enable:
-					save_player_info(player_dict) # player					
+				save_player_info(player_dict) # player					
 
 		team_name = '-' .join(team_name)
 		player_dict['team_id'] = random_id()
@@ -495,8 +493,7 @@ def get_complete_match_info(driver, country_league, sport_name, league_id, seaso
 					json_name = 'check_points/leagues_season/{}/{}.json'.format(sport_name, country_league)
 					save_check_point(json_name, dict_country_league_season)					
 					# print(dict_stadium)					
-					if database_enable:						
-						save_stadium(dict_stadium)
+					save_stadium(dict_stadium)
 				#################################################################
 				match_detail_id = random_id()
 				score_id = random_id()
@@ -513,7 +510,7 @@ def get_complete_match_info(driver, country_league, sport_name, league_id, seaso
 				match_duplicate = check_match_duplicate(event_info['league_id'], event_info['match_date'], event_info['name'])
 				if len(match_duplicate)!= 0:
 					print("MATCH SAVED PREVIOUSLY: ", match_duplicate)
-				if database_enable and len(match_created) == 0 and len(match_duplicate) == 0: #  and not match_created
+				if len(match_created) == 0 and len(match_duplicate) == 0: #  and not match_created
 					print("NEW MATCH ADDED: ")
 					if section =="results":
 						# SET EVENT STATE
@@ -642,9 +639,8 @@ def get_complete_match_info_tennis(driver, country_league, sport_name, league_id
 			stadium_results = get_stadium_id(name_stadium)
 			if len(stadium_results) == 0:
 				# dict_country_league_season[home_participant]['stadium_id'] = event_info['stadium_id']				
-				if database_enable:
-					print("############ Save stadium info ###################")
-					save_stadium(dict_stadium)
+				print("############ Save stadium info ###################")
+				save_stadium(dict_stadium)
 
 			# CASE PLACE OR STADIUM SAVED PREVIOUSLY
 			if len(stadium_results) != 0:
@@ -666,14 +662,13 @@ def get_complete_match_info_tennis(driver, country_league, sport_name, league_id
 			event_info['rounds'] = round_file.replace('.json', '')
 			print("Event info:")
 			print(event_info)
-			print("dict_home: ", dict_home)
-			if database_enable:
-				save_math_info(event_info)
-				save_details_math_info(dict_home)
-				save_details_math_info(dict_visitor)
-				save_score_info(dict_home)
-				save_score_info(dict_visitor)
-				print("SAVED IN DB ...", end='')
+			print("dict_home: ", dict_home)			
+			save_math_info(event_info)
+			save_details_math_info(dict_home)
+			save_details_math_info(dict_visitor)
+			save_score_info(dict_home)
+			save_score_info(dict_visitor)
+			print("SAVED IN DB ...", end='')
 		# list_rounds_ready.append(round_file.split('/')[-1])
 		# dict_leagues_ready[country_league] = list_rounds_ready
 		# dict_country_league_check_point[sport_id] = dict_leagues_ready
@@ -833,17 +828,4 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
 					# driver.quit()
 	del global_check_point[sport_name]['M4']
 	save_check_point('check_points/global_check_point.json', global_check_point)
-
-# CONFIG = load_json('check_points/CONFIG.json')
-# database_enable = CONFIG['DATA_BASE']
-# if database_enable:
-# 	con = getdb()
-
-# if __name__ == "__main__":  	
-# 	driver = launch_navigator('https://www.flashscore.com', database_enable)
-# 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")	
-# 	main_m4(driver)
-# 	if database_enable:
-# 		con.close()
-# 	driver.quit()
 

@@ -122,7 +122,7 @@ def check_previous_execution(file_path = 'check_points/scraper_control.json'):
         dict_scraper_control = {}
     return dict_scraper_control
 
-def launch_navigator(url, database_enable):
+def launch_navigator(url, headless = True):
 	options = webdriver.ChromeOptions()
 	options.add_argument("--disable-application-cache")
 	options.add_argument("--disable-extensions")
@@ -135,8 +135,8 @@ def launch_navigator(url, database_enable):
 	options.add_argument("--disable-blink-features=AutomationControlled")     
 	# options.add_experimental_option("excludeSwitches", ["enable-automation"]) ----
 	options.add_experimental_option("useAutomationExtension", False)
-	# if database_enable:
-	options.add_argument('--headless')
+	if headless:
+		options.add_argument('--headless')
 	options.add_argument('--no-sandbox')
 	# options.add_argument('--disable-dev-shm-usage')  ---	
 	# chrome_path = os.getcwd()+'/chrome_files'

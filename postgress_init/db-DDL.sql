@@ -41,16 +41,12 @@ create table player
 alter table player
     owner to wohhu;
 
-create table season
-(
-    season_id    varchar(40) not null
-        primary key,
-    season_name  varchar(35),
-    season_end   date,
-    season_start date,
-    league_id    varchar(40) not null
-        constraint fks8kd4aueryljws3a8kj228jvm
-            references
+CREATE TABLE season (
+    season_id    VARCHAR(40)  NOT NULL PRIMARY KEY,
+    season_name  VARCHAR(35),
+    season_end   DATE,
+    season_start DATE,
+    league_id    VARCHAR(40)  NOT NULL REFERENCES league (league_id)
 );
 
 alter table season
@@ -144,27 +140,20 @@ create table league_team
 alter table league_team
     owner to wohhu;
 
-create table match
-(
-    match_id      varchar(255) not null
-        primary key,
-    match_country varchar(80),
-    end_time      time(6),
-    match_date    date,
-    name          varchar(70),
-    place         varchar(128),
-    start_time    time(6),    
-    rounds     varchar(40),
-    season_id     varchar(40),    
-    status     varchar(40),
-    statistic     varchar(1600)
-    league_id     varchar(40),
-    constraint fk524ycxnj02ukjb4gghuqh1rod
-        references league_team,
-    stadium_id    varchar(255)
-        constraint fkojlcqppbrrr1l8kd4b8ta35sp
-            references stadium
-
+CREATE TABLE match (
+    match_id      VARCHAR(255)    NOT NULL PRIMARY KEY,
+    match_country VARCHAR(80),
+    end_time      TIME(6),
+    match_date    DATE,
+    name          VARCHAR(70),
+    place         VARCHAR(128),
+    start_time    TIME(6),
+    rounds        VARCHAR(40),
+    season_id     VARCHAR(40),
+    status        VARCHAR(40),
+    statistic     VARCHAR(1600),
+    league_id     VARCHAR(40)     REFERENCES league_team (league_id),
+    stadium_id    VARCHAR(255)    REFERENCES stadium (stadium_id)
 );
 
 alter table match
