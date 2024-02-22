@@ -67,7 +67,7 @@ def main():
 		# 			  "BASEBALL","BOXING", "VOLLEYBALL"])
 
 if __name__ == "__main__":  	
-	driver = launch_navigator('https://www.flashscore.com', headless = False)
+	driver = launch_navigator('https://www.flashscore.com', headless = True)
 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
 	main()
 	# if database_enable:
