@@ -28,7 +28,7 @@ from milestone6 import *
 
 
 def main_others():
-	driver = launch_navigator('https://www.flashscore.com', headless = False)
+	driver = launch_navigator('https://www.flashscore.com', headless = True)
 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
 	day_execution_s1 = -1
 	day_execution_s2 = -1

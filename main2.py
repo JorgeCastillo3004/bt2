@@ -29,7 +29,7 @@ from milestone7 import *
 from milestone8 import *
 
 def main_live():
-	driver = launch_navigator('https://www.flashscore.com', headless = False)
+	driver = launch_navigator('https://www.flashscore.com', headless = True)
 	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")	
 	print("Section live...")
 	day_execution_s7 = -1
