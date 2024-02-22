@@ -51,7 +51,7 @@ def main_live():
 		# if enable_execution_s7:
 		# live_games(driver, section_schedule['LIVE_SECTION']['SPORTS'])
 		print("Lives section: ")
-		update_lives_matchs(driver)		
+		update_lives_matchs(driver)
 		# list_s7.append(datetime.now().time().strftime('%H:%M:%S'))
 		# print(list_s7, '\n')
 

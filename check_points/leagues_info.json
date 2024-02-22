@@ -1,0 +1,248 @@
+{
+    "HOCKEY": {
+        "CZECH REPUBLIC_Extraliga": {
+            "league_name": "Extraliga",
+            "url": "https://www.flashscore.com/hockey/czech-republic/extraliga/",
+            "league_id": "vvah97263",
+            "season_id": "szqz05521",
+            "news": "https://www.flashscore.com/hockey/czech-republic/extraliga/news/",
+            "results": "https://www.flashscore.com/hockey/czech-republic/extraliga/results/",
+            "fixtures": "https://www.flashscore.com/hockey/czech-republic/extraliga/fixtures/",
+            "standings": "https://www.flashscore.com/hockey/czech-republic/extraliga/standings/",
+            "archive": "https://www.flashscore.com/hockey/czech-republic/extraliga/archive/"
+        },
+        "FINLAND_Liiga": {
+            "league_name": "Liiga",
+            "url": "https://www.flashscore.com/hockey/finland/liiga/",
+            "league_id": "qzrv95193",
+            "season_id": "yybl93440",
+            "news": "https://www.flashscore.com/hockey/finland/liiga/news/",
+            "results": "https://www.flashscore.com/hockey/finland/liiga/results/",
+            "fixtures": "https://www.flashscore.com/hockey/finland/liiga/fixtures/",
+            "standings": "https://www.flashscore.com/hockey/finland/liiga/standings/",
+            "archive": "https://www.flashscore.com/hockey/finland/liiga/archive/"
+        },
+        "GERMANY_DEL": {
+            "league_name": "DEL",
+            "url": "https://www.flashscore.com/hockey/germany/del/",
+            "league_id": "mcyw99142",
+            "season_id": "ztxl05220",
+            "news": "https://www.flashscore.com/hockey/germany/del/news/",
+            "results": "https://www.flashscore.com/hockey/germany/del/results/",
+            "fixtures": "https://www.flashscore.com/hockey/germany/del/fixtures/",
+            "standings": "https://www.flashscore.com/hockey/germany/del/standings/",
+            "archive": "https://www.flashscore.com/hockey/germany/del/archive/"
+        },
+        "SWEDEN_SHL": {
+            "league_name": "SHL",
+            "url": "https://www.flashscore.com/hockey/sweden/shl/",
+            "league_id": "cybu03241",
+            "season_id": "taga90805",
+            "news": "https://www.flashscore.com/hockey/sweden/shl/news/",
+            "results": "https://www.flashscore.com/hockey/sweden/shl/results/",
+            "fixtures": "https://www.flashscore.com/hockey/sweden/shl/fixtures/",
+            "standings": "https://www.flashscore.com/hockey/sweden/shl/standings/",
+            "archive": "https://www.flashscore.com/hockey/sweden/shl/archive/"
+        },
+        "SWITZERLAND_National League": {
+            "league_name": "National League",
+            "url": "https://www.flashscore.com/hockey/switzerland/national-league/",
+            "league_id": "owhm92234",
+            "season_id": "oqyl99518",
+            "news": "https://www.flashscore.com/hockey/switzerland/national-league/news/",
+            "results": "https://www.flashscore.com/hockey/switzerland/national-league/results/",
+            "fixtures": "https://www.flashscore.com/hockey/switzerland/national-league/fixtures/",
+            "standings": "https://www.flashscore.com/hockey/switzerland/national-league/standings/",
+            "archive": "https://www.flashscore.com/hockey/switzerland/national-league/archive/"
+        },
+        "USA_NHL": {
+            "league_name": "NHL",
+            "url": "https://www.flashscore.com/nhl/",
+            "league_id": "ibew96969",
+            "season_id": "fwdl00667",
+            "news": "https://www.flashscore.com/nhl/news/",
+            "results": "https://www.flashscore.com/nhl/results/",
+            "fixtures": "https://www.flashscore.com/nhl/fixtures/",
+            "standings": "https://www.flashscore.com/nhl/standings/",
+            "archive": "https://www.flashscore.com/nhl/archive/"
+        },
+        "EUROPE_Champions League": {
+            "league_name": "Champions League",
+            "url": "https://www.flashscore.com/hockey/europe/champions-league/",
+            "league_id": "mirb04327",
+            "season_id": "msnr95073",
+            "news": "https://www.flashscore.com/hockey/europe/champions-league/news/",
+            "results": "https://www.flashscore.com/hockey/europe/champions-league/results/",
+            "fixtures": "https://www.flashscore.com/hockey/europe/champions-league/fixtures/",
+            "standings": "https://www.flashscore.com/hockey/europe/champions-league/standings/",
+            "archive": "https://www.flashscore.com/hockey/europe/champions-league/archive/"
+        },
+        "WORLD_World Championship": {
+            "league_name": "World Championship",
+            "url": "https://www.flashscore.com/hockey/world/world-championship/",
+            "league_id": "iptu91833",
+            "season_id": "mjyv00159",
+            "news": "https://www.flashscore.com/hockey/world/world-championship/news/",
+            "results": "https://www.flashscore.com/hockey/world/world-championship/results/",
+            "fixtures": "https://www.flashscore.com/hockey/world/world-championship/fixtures/",
+            "standings": "https://www.flashscore.com/hockey/world/world-championship/standings/",
+            "archive": "https://www.flashscore.com/hockey/world/world-championship/archive/"
+        }
+    },
+    "BASKETBALL": {
+        "ARGENTINA_Liga A": {
+            "league_name": "Liga A",
+            "url": "https://www.flashscore.com/basketball/argentina/liga-a/",
+            "league_id": "heph01077",
+            "season_id": "prjk95460",
+            "news": "https://www.flashscore.com/basketball/argentina/liga-a/news/",
+            "results": "https://www.flashscore.com/basketball/argentina/liga-a/results/",
+            "fixtures": "https://www.flashscore.com/basketball/argentina/liga-a/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/argentina/liga-a/standings/",
+            "archive": "https://www.flashscore.com/basketball/argentina/liga-a/archive/"
+        },
+        "BRAZIL_NBB": {
+            "league_name": "NBB",
+            "url": "https://www.flashscore.com/basketball/brazil/nbb/",
+            "league_id": "vfex00887",
+            "season_id": "bgmr95624",
+            "news": "https://www.flashscore.com/basketball/brazil/nbb/news/",
+            "results": "https://www.flashscore.com/basketball/brazil/nbb/results/",
+            "fixtures": "https://www.flashscore.com/basketball/brazil/nbb/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/brazil/nbb/standings/",
+            "archive": "https://www.flashscore.com/basketball/brazil/nbb/archive/"
+        },
+        "CHINA_CBA": {
+            "league_name": "CBA",
+            "url": "https://www.flashscore.com/basketball/china/cba/",
+            "league_id": "loob92147",
+            "season_id": "neme99446",
+            "news": "https://www.flashscore.com/basketball/china/cba/news/",
+            "results": "https://www.flashscore.com/basketball/china/cba/results/",
+            "fixtures": "https://www.flashscore.com/basketball/china/cba/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/china/cba/standings/",
+            "archive": "https://www.flashscore.com/basketball/china/cba/archive/"
+        },
+        "FRANCE_LNB": {
+            "league_name": "LNB",
+            "url": "https://www.flashscore.com/basketball/france/lnb/",
+            "league_id": "amgr07785",
+            "season_id": "elao04284",
+            "news": "https://www.flashscore.com/basketball/france/lnb/news/",
+            "results": "https://www.flashscore.com/basketball/france/lnb/results/",
+            "fixtures": "https://www.flashscore.com/basketball/france/lnb/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/france/lnb/standings/",
+            "archive": "https://www.flashscore.com/basketball/france/lnb/archive/"
+        },
+        "ITALY_Lega A": {
+            "league_name": "Lega A",
+            "url": "https://www.flashscore.com/basketball/italy/lega-a/",
+            "league_id": "sqaq00352",
+            "season_id": "xklc92667",
+            "news": "https://www.flashscore.com/basketball/italy/lega-a/news/",
+            "results": "https://www.flashscore.com/basketball/italy/lega-a/results/",
+            "fixtures": "https://www.flashscore.com/basketball/italy/lega-a/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/italy/lega-a/standings/",
+            "archive": "https://www.flashscore.com/basketball/italy/lega-a/archive/"
+        },
+        "SPAIN_ACB": {
+            "league_name": "ACB",
+            "url": "https://www.flashscore.com/basketball/spain/acb/",
+            "league_id": "xjia97998",
+            "season_id": "opty96825",
+            "news": "https://www.flashscore.com/basketball/spain/acb/news/",
+            "results": "https://www.flashscore.com/basketball/spain/acb/results/",
+            "fixtures": "https://www.flashscore.com/basketball/spain/acb/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/spain/acb/standings/",
+            "archive": "https://www.flashscore.com/basketball/spain/acb/archive/"
+        },
+        "TURKEY_Super Lig": {
+            "league_name": "Super Lig",
+            "url": "https://www.flashscore.com/basketball/turkey/super-lig/",
+            "league_id": "eiyl01531",
+            "season_id": "rspm08496",
+            "news": "https://www.flashscore.com/basketball/turkey/super-lig/news/",
+            "results": "https://www.flashscore.com/basketball/turkey/super-lig/results/",
+            "fixtures": "https://www.flashscore.com/basketball/turkey/super-lig/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/turkey/super-lig/standings/",
+            "archive": "https://www.flashscore.com/basketball/turkey/super-lig/archive/"
+        },
+        "USA_NBA": {
+            "league_name": "NBA",
+            "url": "https://www.flashscore.com/basketball/usa/nba/",
+            "league_id": "gipc96932",
+            "season_id": "wlyz00454",
+            "news": "https://www.flashscore.com/basketball/usa/nba/news/",
+            "results": "https://www.flashscore.com/basketball/usa/nba/results/",
+            "fixtures": "https://www.flashscore.com/basketball/usa/nba/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/usa/nba/standings/",
+            "archive": "https://www.flashscore.com/basketball/usa/nba/archive/"
+        },
+        "VENEZUELA_Superliga": {
+            "league_name": "Superliga",
+            "url": "https://www.flashscore.com/basketball/venezuela/superliga/",
+            "league_id": "qomn96219",
+            "season_id": "oywy08954",
+            "news": "https://www.flashscore.com/basketball/venezuela/superliga/news/",
+            "results": "https://www.flashscore.com/basketball/venezuela/superliga/results/",
+            "fixtures": "https://www.flashscore.com/basketball/venezuela/superliga/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/venezuela/superliga/standings/",
+            "archive": "https://www.flashscore.com/basketball/venezuela/superliga/archive/"
+        },
+        "EUROPE_EuroBasket": {
+            "league_name": "EuroBasket",
+            "url": "https://www.flashscore.com/basketball/europe/eurobasket/",
+            "league_id": "ceoz95841",
+            "season_id": "krht01443",
+            "news": "https://www.flashscore.com/basketball/europe/eurobasket/news/",
+            "results": "https://www.flashscore.com/basketball/europe/eurobasket/results/",
+            "fixtures": "https://www.flashscore.com/basketball/europe/eurobasket/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/europe/eurobasket/standings/",
+            "archive": "https://www.flashscore.com/basketball/europe/eurobasket/archive/"
+        },
+        "EUROPE_Euroleague": {
+            "league_name": "Euroleague",
+            "url": "https://www.flashscore.com/basketball/europe/euroleague/",
+            "league_id": "ztbk09148",
+            "season_id": "xlut91671",
+            "news": "https://www.flashscore.com/basketball/europe/euroleague/news/",
+            "results": "https://www.flashscore.com/basketball/europe/euroleague/results/",
+            "fixtures": "https://www.flashscore.com/basketball/europe/euroleague/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/europe/euroleague/standings/",
+            "archive": "https://www.flashscore.com/basketball/europe/euroleague/archive/"
+        },
+        "EUROPE_Eurocup": {
+            "league_name": "Eurocup",
+            "url": "https://www.flashscore.com/basketball/europe/eurocup/",
+            "league_id": "ilic97833",
+            "season_id": "ehnu99437",
+            "news": "https://www.flashscore.com/basketball/europe/eurocup/news/",
+            "results": "https://www.flashscore.com/basketball/europe/eurocup/results/",
+            "fixtures": "https://www.flashscore.com/basketball/europe/eurocup/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/europe/eurocup/standings/",
+            "archive": "https://www.flashscore.com/basketball/europe/eurocup/archive/"
+        },
+        "EUROPE_Champions League": {
+            "league_name": "Champions League",
+            "url": "https://www.flashscore.com/basketball/europe/champions-league/",
+            "league_id": "dsoc07474",
+            "season_id": "rxfd01200",
+            "news": "https://www.flashscore.com/basketball/europe/champions-league/news/",
+            "results": "https://www.flashscore.com/basketball/europe/champions-league/results/",
+            "fixtures": "https://www.flashscore.com/basketball/europe/champions-league/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/europe/champions-league/standings/",
+            "archive": "https://www.flashscore.com/basketball/europe/champions-league/archive/"
+        },
+        "WORLD_World Cup": {
+            "league_name": "World Cup",
+            "url": "https://www.flashscore.com/basketball/world/world-cup/",
+            "league_id": "casq97060",
+            "season_id": "ptlv91518",
+            "news": "https://www.flashscore.com/basketball/world/world-cup/news/",
+            "results": "https://www.flashscore.com/basketball/world/world-cup/results/",
+            "fixtures": "https://www.flashscore.com/basketball/world/world-cup/fixtures/",
+            "standings": "https://www.flashscore.com/basketball/world/world-cup/standings/",
+            "archive": "https://www.flashscore.com/basketball/world/world-cup/archive/"
+        }
+    }
+}
