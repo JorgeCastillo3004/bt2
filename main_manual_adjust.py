@@ -27,6 +27,7 @@ from milestone4 import *
 # from milestone5 import *
 from milestone6 import *
 from milestone7 import *
+from milestone8 import *
 
 CONFIG = load_json('check_points/CONFIG.json')
 database_enable = CONFIG['DATA_BASE']
