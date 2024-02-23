@@ -20,7 +20,7 @@
 					  "BASEBALL","BOXING", "VOLLEYBALL"]},
 	"GET_PLAYERS": {"TIME":"montly|16|1:00:00",
 					"SPORTS": ["HOCKEY"]},
-	"LIVE_SECTION": {"TIME":"seconds|60",
+	"LIVE_SECTION": {"TIME":"seconds|180",
 					"SPORTS": ["FOOTBALL", "TENNIS", "BASKETBALL", "HOCKEY", "GOLF", "AM._FOOTBALL",
 					  "BASEBALL","BOXING", "MOTORSPORT", "VOLLEYBALL"]},
 	"EXAMPLE": {"TIME":"seconds|90|14:15:00",
