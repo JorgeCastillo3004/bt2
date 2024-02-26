@@ -66,8 +66,7 @@ def main_others():
 		
 		if enable_execution_s1:
 			print("Execution news enable: ")
-			# main_extract_news(driver, section_schedule['EXTRACT_NEWS']['SPORTS'], section_schedule['EXTRACT_NEWS']['MAX_OLDER_DATE_ALLOWED'])
-			print("Funcion start to execute ")
+			main_extract_news(driver, section_schedule['EXTRACT_NEWS']['SPORTS'], section_schedule['EXTRACT_NEWS']['MAX_OLDER_DATE_ALLOWED'])			
 			list_s1.append(datetime.now().time().strftime('%H:%M:%S'))
 			print(list_s1, '\n')
 			print("Show last executed time")
