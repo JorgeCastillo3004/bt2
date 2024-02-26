@@ -15,7 +15,7 @@
 	"GET_RESULTS": {"TIME":"weekly|monday|14:40:00", 
 					"SPORTS": ["FOOTBALL"]},
 
-	"GET_FIXTURES": {"TIME":"weekly|monday|21:50:00",
+	"GET_FIXTURES": {"TIME":"weekly|monday|22:05:00",
 					"SPORTS": ["FOOTBALL", "BASEBALL"]},
 	"GET_PLAYERS": {"TIME":"montly|16|1:00:00",
 					"SPORTS": ["HOCKEY"]},
