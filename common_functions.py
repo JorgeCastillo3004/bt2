@@ -326,30 +326,33 @@ def execute_section(execution_schedule, day_execution, execute_ready):
 			execution_schedule = part1 +'|'+str(time_execution.time())			
 			# day_execution = datetime.now().day
 	if 'seconds' in execution_schedule:
-		# print("Sections seconds", execution_schedule)
+		
 		if len(execution_schedule.split("|")) == 2:
 			part1, seconds_str = execution_schedule.split("|")			
 			option = 1
 		if len(execution_schedule.split("|")) == 3:
 			part1, seconds_str, time_str = execution_schedule.split("|")
 			option = 2
-
+		
 		if option == 1:			
-			time_execution = datetime.now()
+			time_execution = datetime.now()			
 			enable_execution = True
 			execute_ready = False				
 			time_execution = time_execution + timedelta(seconds = int(seconds_str))
-			execution_schedule = part1 +'|' + seconds_str +'|'+ time_execution.time().strftime('%H:%M:%S') 
+			execution_schedule = part1 +'|' + seconds_str +'|'+ time_execution.time().strftime('%H:%M:%S')			
 				
 		if option == 2:
 			time_execution = datetime.strptime(time_str, '%H:%M:%S')			
-			if datetime.now().time() >= time_execution.time() and datetime.now().time() < (time_execution + timedelta(1)).time():
+			if datetime.now().time() >= time_execution.time() and datetime.now().time() < (time_execution + timedelta(seconds = 10)).time():
 				enable_execution = True
 				execute_ready = False
 				time_execution = time_execution + timedelta(seconds = int(seconds_str))				
 				execution_schedule = part1 +'|' + seconds_str +'|'+ time_execution.time().strftime('%H:%M:%S') 
-				# print(execution_schedule)
-			# day_execution = datetime.now().day
+				
+
+		# print("Salida de la funcion: ", "#"*30)
+		# print("enable_execution: ", enable_execution, "Current time: ", datetime.now().time(), "execution_schedule: ", execution_schedule)
+			
 
 	return enable_execution, day_execution, execute_ready, execution_schedule
 

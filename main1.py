@@ -28,8 +28,8 @@ from milestone6 import *
 
 
 def main_others():
-	driver = launch_navigator('https://www.flashscore.com', headless = True)
-	login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
+	# driver = launch_navigator('https://www.flashscore.com', headless = True)
+	# login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
 	day_execution_s1 = -1
 	day_execution_s2 = -1
 	day_execution_s3 = -1
@@ -62,11 +62,15 @@ def main_others():
 			execution_schedule_s1 = new_execution_schedule_s1
 			old_execution_schedule_s1 = execution_schedule_s1
 			day_execution_s1 = -1
-		enable_execution_s1, day_execution_s1, execute_ready_s1, _ = execute_section(execution_schedule_s1, day_execution_s1, execute_ready_s1)
-		if enable_execution_s1:		
-			main_extract_news(driver, section_schedule['EXTRACT_NEWS']['SPORTS'], section_schedule['EXTRACT_NEWS']['MAX_OLDER_DATE_ALLOWED'])
+		enable_execution_s1, day_execution_s1, execute_ready_s1, execution_schedule_s1 = execute_section(execution_schedule_s1, day_execution_s1, execute_ready_s1)
+		
+		if enable_execution_s1:
+			print("Execution news enable: ")
+			# main_extract_news(driver, section_schedule['EXTRACT_NEWS']['SPORTS'], section_schedule['EXTRACT_NEWS']['MAX_OLDER_DATE_ALLOWED'])
+			print("Funcion start to execute ")
 			list_s1.append(datetime.now().time().strftime('%H:%M:%S'))
 			print(list_s1, '\n')
+			print("Show last executed time")
 
 		new_execution_schedule_s2 = section_schedule['CREATE_LEAGUES']['TIME']
 		if new_execution_schedule_s2 != old_execution_schedule_s2:
@@ -123,9 +127,9 @@ def main_others():
 			list_s6.append(datetime.now().time().strftime('%H:%M:%S'))
 			print(list_s6, '\n')
 
+		time.sleep(5)
 		section_schedule = update_data()
-		print("o-", end='')
-		time.sleep(1)
+		print("o-", end='')		
 
 if __name__ == "__main__":	
 	main_others()
