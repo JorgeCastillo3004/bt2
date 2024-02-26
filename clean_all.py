@@ -8,23 +8,23 @@ import os
 import shutil
 
 
-if os.path.isfile("check_points/sports_id.json"):
-	os.remove("check_points/sports_id.json")
+# if os.path.isfile("check_points/sports_id.json"):
+# 	os.remove("check_points/sports_id.json")
 
-if os.path.isfile("check_points/leagues_info.json"):
-	os.remove("check_points/leagues_info.json")
+# if os.path.isfile("check_points/leagues_info.json"):
+# 	os.remove("check_points/leagues_info.json")
 
-if os.path.isfile('check_points/global_check_point.json'):
-	os.remove('check_points/global_check_point.json')
+# if os.path.isfile('check_points/global_check_point.json'):
+# 	os.remove('check_points/global_check_point.json')
 
 # if os.path.isfile('check_points/last_saved_news.json'):
 # 	os.remove('check_points/last_saved_news.json')
 
-files = os.listdir('check_points/leagues_season/')
+# files = os.listdir('check_points/leagues_season/')
 
 
-shutil.rmtree('check_points/leagues_season/')
-print('Remove folder: check_points/leagues_season/')
+# shutil.rmtree('check_points/leagues_season/')
+# print('Remove folder: check_points/leagues_season/')
 # shutil.rmtree('check_points/news/')
 # print('Remove folder: check_points/news/')
 # print("Files and folder removed: ")
@@ -46,78 +46,78 @@ print('Remove folder: check_points/leagues_season/')
 
 con = getdb()
 
-print("Delete all from score_entity ")
-query = "DELETE FROM score_entity;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-print("Delete all from match_detail ")
-query = "DELETE FROM match_detail;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-print("Delete all from match ")
-query = "DELETE FROM match;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-print("Delete all from stadium ")
-query = "DELETE FROM stadium;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-print("Delete all from league_team ")
-query = "DELETE FROM league_team;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-print("Delete all from team_players_entity")
-query = "DELETE FROM team_players_entity;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-print("Delete all from player")
-query = "DELETE FROM player;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-print("Delete all from season ")
-query = "DELETE FROM season;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-
-print("Delete all from league ")
-query = "DELETE FROM league;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-
-print("Delete all from team ")
-query = "DELETE FROM team;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-print("Delete all from sport ")
-query = "DELETE FROM sport;"
-cur = con.cursor()
-cur.execute(query)
-con.commit()
-
-# print("Delete all from news ")
-# query = "DELETE FROM news;"
+# print("Delete all from score_entity ")
+# query = "DELETE FROM score_entity;"
 # cur = con.cursor()
 # cur.execute(query)
 # con.commit()
+
+# print("Delete all from match_detail ")
+# query = "DELETE FROM match_detail;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+# print("Delete all from match ")
+# query = "DELETE FROM match;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+# print("Delete all from stadium ")
+# query = "DELETE FROM stadium;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+# print("Delete all from league_team ")
+# query = "DELETE FROM league_team;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+# print("Delete all from team_players_entity")
+# query = "DELETE FROM team_players_entity;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+# print("Delete all from player")
+# query = "DELETE FROM player;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+# print("Delete all from season ")
+# query = "DELETE FROM season;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+
+# print("Delete all from league ")
+# query = "DELETE FROM league;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+
+# print("Delete all from team ")
+# query = "DELETE FROM team;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+# print("Delete all from sport ")
+# query = "DELETE FROM sport;"
+# cur = con.cursor()
+# cur.execute(query)
+# con.commit()
+
+print("Delete all from news ")
+query = "DELETE FROM news;"
+cur = con.cursor()
+cur.execute(query)
+con.commit()
 
 cur.close()
