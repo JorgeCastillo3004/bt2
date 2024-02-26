@@ -12,13 +12,11 @@
 					"SPORTS": ["FOOTBALL", "TENNIS", "BASKETBALL", "HOCKEY", "GOLF", "AM._FOOTBALL",
 					  "BASEBALL","BOXING", "MOTORSPORT", "VOLLEYBALL"]},
 
-	"GET_RESULTS": {"TIME":"montly|15|14:00:30", 
-					"SPORTS": ["FOOTBALL", "BASKETBALL", "HOCKEY", "AM._FOOTBALL",
-					  "BASEBALL","BOXING", "VOLLEYBALL"]},
+	"GET_RESULTS": {"TIME":"weekly|monday|4:00:00", 
+					"SPORTS": ["FOOTBALL"]},
 
-	"GET_FIXTURES": {"TIME":"montly|15|1:00:00",
-					"SPORTS": ["FOOTBALL", "BASKETBALL", "HOCKEY", "AM._FOOTBALL",
-					  "BASEBALL","BOXING", "VOLLEYBALL"]},
+	"GET_FIXTURES": {"TIME":"weekly|monday|2:55:00",
+					"SPORTS": ["FOOTBALL"]},
 	"GET_PLAYERS": {"TIME":"montly|16|1:00:00",
 					"SPORTS": ["HOCKEY"]},
 	"LIVE_SECTION": {"TIME":"seconds|180",
