@@ -57,6 +57,7 @@ def main_others():
 	old_execution_schedule_s6 = '*'
 	section_schedule = update_data()
 	while True:
+		print("Start check: ")
 		new_execution_schedule_s1 = section_schedule['EXTRACT_NEWS']['TIME']
 		if new_execution_schedule_s1 != old_execution_schedule_s1:
 			execution_schedule_s1 = new_execution_schedule_s1
