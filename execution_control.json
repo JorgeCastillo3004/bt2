@@ -1,22 +1,21 @@
 {
-	"EXTRACT_NEWS": {"TIME":"seconds|900",
+	"EXTRACT_NEWS": {"TIME":"saturday|monday|17:00:00",
 					"SPORTS": ["FOOTBALL","TENNIS", "BASKETBALL","AMERICAN_SPORTS", "CRICKET", "GOLF",
 							  "HOCKEY"],
 					"MAX_OLDER_DATE_ALLOWED":31
 					},
-	"CREATE_LEAGUES": {"TIME":"weekly|saturday|12:00:00",
-						"SPORTS": ["FOOTBALL", "TENNIS", "BASKETBALL", "HOCKEY", "GOLF", "AM._FOOTBALL",
-					  "BASEBALL","BOXING", "MOTORSPORT", "VOLLEYBALL"]},
+	"CREATE_LEAGUES": {"TIME":"weekly|monday|16:30:00",
+						"SPORTS": ["TENNIS", "GOLF","CRICKET"]},
 
-	"CREATE_TEAMS": {"TIME":"weekly|saturday|4:00:00", 
+	"CREATE_TEAMS": {"TIME":"weekly|monday|17:00:00", 
 					"SPORTS": ["FOOTBALL", "TENNIS", "BASKETBALL", "HOCKEY", "GOLF", "AM._FOOTBALL",
 					  "BASEBALL","BOXING", "MOTORSPORT", "VOLLEYBALL"]},
 
-	"GET_RESULTS": {"TIME":"weekly|monday|14:40:00", 
-					"SPORTS": ["FOOTBALL"]},
+	"GET_RESULTS": {"TIME":"weekly|monday|17:30:00", 
+					"SPORTS": ["TENNIS", "GOLF","CRICKET"]},
 
-	"GET_FIXTURES": {"TIME":"weekly|monday|22:05:00",
-					"SPORTS": ["FOOTBALL", "BASEBALL"]},
+	"GET_FIXTURES": {"TIME":"weekly|monday|18:30:00",
+					"SPORTS": ["TENNIS", "GOLF","CRICKET"]},
 	"GET_PLAYERS": {"TIME":"montly|16|1:00:00",
 					"SPORTS": ["HOCKEY"]},
 	"LIVE_SECTION": {"TIME":"seconds|180",
