@@ -8,7 +8,7 @@ def getdb():
 				host="localhost",
 				user="wohhu",
 				password="caracas123",
-		dbname='sports_db',
+		dbname='sports_db2',
 		)
 
 def save_news_database(dict_news):	
@@ -199,6 +199,20 @@ def get_rounds_ready(league_id, season_id):
 
 def check_player_duplicates(player_country, player_name, player_dob):
 	query = "SELECT player_id FROM player WHERE player_country ='{}' AND player_name ='{}' AND player_dob ='{}';".format(player_country, player_name, player_dob)
+	cur = con.cursor()
+	cur.execute(query)	
+	results = [row[0] for row in cur.fetchall()]
+	return results
+
+def check_team_duplicates(team_name, sport_id):
+	query = "SELECT team_id FROM team WHERE team_name ='{}' AND sport_id ='{}';".format(team_name, sport_id)
+	cur = con.cursor()
+	cur.execute(query)	
+	results = [row[0] for row in cur.fetchall()]
+	return results
+
+def check_team_season_duplicates(league_id, season_id, team_id):
+	query = "SELECT season_id FROM league_team WHERE league_id ='{}' AND season_id ='{}' AND team_id ='{}';".format(league_id, season_id, team_id)
 	cur = con.cursor()
 	cur.execute(query)	
 	results = [row[0] for row in cur.fetchall()]

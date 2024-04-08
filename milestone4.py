@@ -537,41 +537,103 @@ def get_complete_match_info(driver, country_league, sport_name, league_id, seaso
 		print("folder_path to delete: ", league_folder)
 		shutil.rmtree(league_folder)
 
-def save_team_player_single(home_links, dict_season):
+def save_team_player_single(driver, player_link , league_info):
 	# LOAD PLAYER URL
-	wait_update_page(driver, home_links, 'container__heading')
+	wait_update_page(driver, player_link, 'container__heading')
 	player_dict = get_player_data_tennis(driver)
-
-	# 
-	player_dict['season_id'] = season_id			
+	player_dict['team_id'] = player_dict['player_id']
+	player_dict['season_id'] = league_info['season_id']
 	player_dict['team_country'] = player_dict['player_country']
+	player_dict['team_name'] = player_dict['player_name']
 	player_dict['team_desc'] = ''
 	player_dict['team_logo'] = player_dict['player_photo']			
-	player_dict['sport_id'] = sport_id
+	player_dict['sport_id'] = league_info['sport_id']
 	player_dict['instance_id'] = random_id()
 	player_dict['player_meta'] = ''
 	player_dict['team_meta'] = ''
 	player_dict['team_position'] = 0
-	player_dict['league_id'] = league_id
-	print("Save player info in database")
+	player_dict['league_id'] = league_info['league_id']
+	
+	# CHECK IF PLAYER WAS CREATED PREVIOUSLY
+	player_id_list = check_player_duplicates(player_dict['player_country'], player_dict['player_name'], player_dict['player_dob'])
+	if not player_id_list:
+		save_player_info(player_dict) # player
+	else:
+		print('Player created previously')
 
-def get_complete_match_info_tennis(driver, country_league, sport_name, league_id, season_id,
-							 dict_country_league_season, \
-							 section = 'results'):
-	dict_sport_id = get_dict_sport_id()	# GET DICT SPORT FROM DATABASE
-	sport_id = dict_sport_id[sport_name]
-	league_folder = 'check_points/{}/{}/'.format(section, country_league)
+	# CHECK IF TEAM WAS CREATED 
+	team_id_list = check_team_duplicates(player_dict['team_name'], player_dict['sport_id'])
+	if not team_id_list:
+		save_team_info(player_dict) # team
+		save_team_players_entity(player_dict) # team_players_entity		
+	else:
+		print('Team created previously')
+		player_dict['team_id'] =  team_id_list[0]
+
+
+	# CHECK IF TEAM WAS SAVED ON THIS SEASON
+	team_season = check_team_season_duplicates(player_dict['league_id'], player_dict['season_id'], player_dict['team_id'])
+	if not team_season:
+		save_league_team_entity(player_dict) # league_team
+	return player_dict['team_id']
+
+def save_team_player_doubles(driver, player_links , league_info):
+	# LOAD PLAYER URL
+	team_members = []
+	for player_link in player_links:
+		wait_update_page(driver, player_link, 'container__heading')
+		player_dict = get_player_data_tennis(driver)		
+		player_dict['season_id'] = league_info['season_id']
+		player_dict['team_country'] = player_dict['player_country']		
+		player_dict['team_desc'] = ''
+		player_dict['team_logo'] = player_dict['player_photo']			
+		player_dict['sport_id'] = league_info['sport_id']
+		player_dict['instance_id'] = random_id()
+		player_dict['player_meta'] = ''
+		player_dict['team_meta'] = ''
+		player_dict['team_position'] = 0
+		player_dict['league_id'] = league_info['league_id']
+		team_members.append(player_dict['player_name'])
+		# CHECK IF PLAYER WAS CREATED PREVIOUSLY
+		player_id_list = check_player_duplicates(player_dict['player_country'], player_dict['player_name'], player_dict['player_dob'])
+		if not player_id_list:
+			save_player_info(player_dict) # player
+		else:
+			print('Player created previously')			
+	
+	# TEAM CREATION
+	player_dict['team_id'] = random_id()
+	player_dict['team_name'] = '-'.join(team_members)
+	
+	team_id_list = check_team_duplicates(player_dict['team_name'], player_dict['sport_id'])
+	if not team_id_list:
+		save_team_info(player_dict) # team
+		save_team_players_entity(player_dict) # team_players_entity		
+	else:
+		print('Team created previously')
+		player_dict['team_id'] =  team_id_list[0]
+
+
+	# CHECK IF TEAM WAS SAVED ON THIS SEASON
+	team_season = check_team_season_duplicates(player_dict['league_id'], player_dict['season_id'], player_dict['team_id'])
+	if not team_season:
+		save_league_team_entity(player_dict) # league_team
+	return player_dict['team_id']
+
+
+# def get_complete_match_info_tennis(driver, country_league, sport_name, league_id, season_id,
+# 							 dict_country_league_season, \
+# 							 section = 'results'):
+def get_complete_match_info_tennis(driver, league_info, section='results'):
+	
+	# LOAD ROUNDS FILES PREVIOUSLY CREATED
+	league_folder = 'check_points/{}/{}/'.format(section, league_info['league_name'])# league_info['league_name']= country_league
 	if os.path.exists(league_folder):
 		round_files = os.listdir(league_folder)
 	else:
 		round_files = []
 
 	print(round_files, '\n')
-	# load round ready:
-	# try:
-	# 	list_rounds_ready = dict_leagues_ready[country_league]
-	# except:
-	# 	list_rounds_ready = []
 	
 	for round_file in round_files:
 		# if not round_file.split('/')[-1] in list_rounds_ready:
@@ -579,7 +641,7 @@ def get_complete_match_info_tennis(driver, country_league, sport_name, league_id
 		print(file_path)
 		round_info = load_json(file_path)        
 		for event_index, event_info in round_info.items():
-
+			# GET MATCH DATA
 			url_details = event_info['link_details']
 			print("Current URL: ", url_details)
 			wait_load_details(driver, url_details)
@@ -587,38 +649,46 @@ def get_complete_match_info_tennis(driver, country_league, sport_name, league_id
 			print("event_info tennis: ", event_info)
 			
 			event_info['statistic'] = get_statistics_game(driver)
-			event_info['league_id'] = league_id			
+			event_info['league_id'] = league_info['league_id']
 
 			print("event_info['match_date']", event_info['match_date'])
 			
 			event_info['match_date'] = driver.find_element(By.CLASS_NAME, 'duelParticipant__startTime').text
 			event_info['match_date'], event_info['start_time'] = get_time_date_format(event_info['match_date'], section ='results')	
 			event_info['end_time'] = event_info['start_time']
+
+			if section =="results":
+				# SET EVENT STATE
+				event_info['status'] = 'R'
+			elif section =="fixtures":
+				# SET EVENT STATE
+				event_info['status'] = 'P'
+
 			# print("event_info: ", event_info)
 			home_links, away_links = get_links_participants(driver)
+			print('home_links, away_links')
+			print(home_links, away_links)
 
 			# dict_season ; sport_id, league_id, season_id
 
 
 			# CASE SINGLES			
 			if len(home_links) == 1:  
-				save_team_player_single(home_links, dict_season)
-				save_team_player_single(away_links, dict_season)
+				team_id_home = save_team_player_single(driver, home_links[0], league_info)# Pending pass sport_id
+				team_id_away =  save_team_player_single(driver, away_links[0], league_info)# Pending pass sport_id
 			else:
 			# CASE DOUBLES 
-				save_team_player_doubles(home_links, dict_season)
-				save_team_player_doubles(away_links, dict_season)
+				team_id_home = save_team_player_doubles(driver, home_links, league_info) # dict_season
+				team_id_away = save_team_player_doubles(driver, away_links, league_info) # dict_season
 
 
 			# dict_country_league_season, home_participant = save_participants_info(driver, home_links, sport_id, league_id, season_id, dict_country_league_season)
 			# dict_country_league_season, away_participant = save_participants_info(driver, away_links, sport_id, league_id, season_id, dict_country_league_season)
 
 			print("Salida del dict: ")
-			print(dict_country_league_season)
-			print("home_participant", home_participant)
-			print("away_participant", away_participant)
-			team_id_home = dict_country_league_season[home_participant]
-			team_id_visitor = dict_country_league_season[away_participant]
+			# print(dict_country_league_season)			
+			# team_id_home = dict_country_league_season[home_participant]
+			# team_id_away = dict_country_league_season[away_participant]
 
 			# LOAD PLACE OR STADIUM INFO AND SAVE IN DB.			
 			event_info['stadium_id'] = random_id()
@@ -650,14 +720,14 @@ def get_complete_match_info_tennis(driver, country_league, sport_name, league_id
 			match_detail_id = random_id()
 			score_id = random_id()
 			dict_home = {'match_detail_id':match_detail_id, 'home':True, 'visitor':False, 'match_id':event_info['match_id'],\
-						'team_id':team_id_home['team_id'], 'points':event_info['home_result'], 'score_id':score_id}
+						'team_id':team_id_home, 'points':event_info['home_result'], 'score_id':score_id}
 			match_detail_id = random_id()
 			score_id = random_id()
 			dict_visitor = {'match_detail_id':match_detail_id, 'home':False, 'visitor':True, 'match_id':event_info['match_id'],\
-						'team_id':team_id_visitor['team_id'], 'points':event_info['visitor_result'], 'score_id':score_id}
+						'team_id':team_id_away, 'points':event_info['visitor_result'], 'score_id':score_id}
 			
 			################# COMPLETE DATE ######################
-			event_info['season_id'] = season_id
+			event_info['season_id'] = league_info['season_id']
 			event_info['tournament_id'] = ''
 			event_info['rounds'] = round_file.replace('.json', '')
 			print("Event info:")
@@ -703,6 +773,7 @@ def pending_to_process(dict_country_league_check_point, sport_id, country_league
 
 def results_fixtures_extraction(driver, list_sports, name_section = 'results'):	
 	# dict_country_league_check_point = load_check_point('check_points/country_leagues_results_ready.json')
+	dict_sport_id = get_dict_sport_id()	# GET DICT SPORT FROM DATABASE
 	leagues_info_json = load_check_point('check_points/leagues_info.json')
 	check_point = load_check_point('check_points/check_point_m4.json')	
 	
@@ -765,6 +836,11 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
 				#####################################################################
 				path_league_info = 'check_points/leagues_season/{}/{}.json'.format(sport_name, league_name)
 				print("League_id, season_id: ", league_info['league_id'], league_info['season_id'])
+				# save in the same dict league_name, sport_name
+				league_info['league_name'] = league_name
+				league_info['sport_name'] = sport_name
+				league_info['sport_id'] = dict_sport_id[sport_name]				
+				
 				# list_rounds = get_rounds_ready(league_info['league_id'], league_info['season_id'])
 				list_rounds = []
 				print("List old round from db ", list_rounds)
@@ -797,12 +873,6 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
 				print("List of teams: ", list(dict_league.keys()))
 				
 				if flag_to_continue and enable_league:
-					################################################################################
-					#			 				DRIVER CREATION AND LOGIN 						   #
-					################################################################################
-					# driver = launch_navigator('https://www.flashscore.com', database_enable)
-					# login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
-					################################################################################
 
 					global_check_point[sport_name]['M4']['league'] = league_name
 					save_check_point('check_points/global_check_point.json', global_check_point)
@@ -811,18 +881,17 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
 					if name_section in list(league_info.keys()):
 
 						# LOAD SECTION RESULS OR FIXTURES
-						wait_update_page(driver, league_info[name_section], "container__heading")
+						# wait_update_page(driver, league_info[name_section], "container__heading")
 						
 						# START NAVIGATION THROUGH ROUNDS
-						print("Navigate navigate_through_rounds")
-						navigate_through_rounds(driver, league_name, list_rounds, section_name = name_section)
+						# print("Navigate navigate_through_rounds")
+						# navigate_through_rounds(driver, league_name, list_rounds, section_name = name_section)
 
 						if not individual_sport:
 							get_complete_match_info(driver, league_name, sport_name, league_info['league_id'],
 										league_info['season_id'], dict_league, section=name_section)
 						else:
-							get_complete_match_info_tennis(driver, league_name, sport_name, league_info['league_id'],
-									league_info['season_id'],dict_league, section=name_section)
+							get_complete_match_info_tennis(driver, league_info, section=name_section)
 						# build_check_point(sport_id, league_name)
 						# sport_dict[league_name] = []
 					# driver.quit()
