@@ -8,7 +8,7 @@ def getdb():
 				host="localhost",
 				user="wohhu",
 				password="caracas123",
-		dbname='sports_db',
+		dbname='sports_db2',
 		)
 
 def save_news_database(dict_news):	
@@ -156,9 +156,23 @@ def get_dict_league_ready(sport_id = 'TENNIS'):
 ######################################## FUNCTIONS RELATED TO MATCHS ########################################
 def save_math_info(dict_match):
 	print("dict_match: ", dict_match['statistic'])
+	table_dict = {
+    "match_id": 255,
+    "match_country": 80,
+    "end_time": 1,  # No es una cadena de caracteres
+    "match_date": 1,  # No es una cadena de caracteres
+    "name": 70,
+    "place": 128,
+    "start_time": 1,  # No es una cadena de caracteres
+    "league_id": 40,
+    "stadium_id": 255,
+    "tournament_id": 255,
+    "rounds": 40,
+    "season_id": 40,
+    "statistic": 1600}
 	for key, value in dict_match.items():
 		try:
-			print(key, len(value), value)
+			print(f"{key} {len(value)}'/'{table_dict[key]} {value}")
 		except:
 			print(key, value)
 	query = "INSERT INTO match VALUES(%(match_id)s, %(match_country)s, %(end_time)s,\
