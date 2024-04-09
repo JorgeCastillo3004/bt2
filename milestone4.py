@@ -657,12 +657,16 @@ def get_complete_match_info_tennis(driver, league_info, section='results'):
 			event_info['match_date'], event_info['start_time'] = get_time_date_format(event_info['match_date'], section ='results')	
 			event_info['end_time'] = event_info['start_time']
 
-			if section =="results":
+			if section =="results" and not '-' in event_info['home_result']:
 				# SET EVENT STATE
 				event_info['status'] = 'R'
-			elif section =="fixtures":
+			elif section =="fixtures" or '-' in event_info['home_result']:
 				# SET EVENT STATE
 				event_info['status'] = 'P'
+				# CHECK STATUS IS PENDING REPLACE RESULTS BY -1
+				event_info['home_result'] = -1
+				event_info['visitor_result'] = -1
+				
 
 			# print("event_info: ", event_info)
 			home_links, away_links = get_links_participants(driver)
