@@ -8,7 +8,7 @@ def getdb():
 				host="localhost",
 				user="wohhu",
 				password="caracas123",
-		dbname='sports_db2',
+		dbname='sports_db',
 		)
 
 def save_news_database(dict_news):	
