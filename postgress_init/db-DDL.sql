@@ -152,7 +152,7 @@ CREATE TABLE match (
     season_id     VARCHAR(40),
     status        VARCHAR(40),
     statistic     VARCHAR(1600),
-    league_id     VARCHAR(40)     REFERENCES league_team (league_id),
+    league_id     VARCHAR(40)     REFERENCES league (league_id),
     stadium_id    VARCHAR(255)    REFERENCES stadium (stadium_id)
 );
 
