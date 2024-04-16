@@ -57,7 +57,7 @@ def main():
 		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL", "AM._FOOTBALL","HOCKEY","BASEBALL"], name_section = 'results')
 
 	if fixture_extraction_flag:
-		results_fixtures_extraction(driver, ["AM._FOOTBALL","HOCKEY","BASEBALL"], name_section = 'fixtures')
+		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL", "AM._FOOTBALL","HOCKEY","BASEBALL"], name_section = 'fixtures')
 
 	if players_flag:
 		players(driver, ["HOCKEY"])
