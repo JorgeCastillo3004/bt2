@@ -51,13 +51,13 @@ def main():
 		create_leagues(driver, ["TENNIS", "GOLF","CRICKET", "HOCKEY"]) #, "GOLF", "AM._FOOTBALL", "BASEBALL"   READY: ["HOCKEY","BASKETBALL", "AM._FOOTBALL", "BASEBALL"]
 # "FOOTBALL", "BASKETBALL", "AM._FOOTBALL","HOCKEY","BASEBALL"]
 	if teams_creation_flag:
-		teams_creation(driver, ["TENNIS", "GOLF"]) # , "GOLF", "AM._FOOTBALL", "BASEBALL"
+		teams_creation(driver, ["FOOTBALL", "BASKETBALL", "AM._FOOTBALL","HOCKEY","BASEBALL"]) # , "GOLF", "AM._FOOTBALL", "BASEBALL"
 
 	if results_extraction_flag:
-		results_fixtures_extraction(driver, ["TENNIS", "GOLF","CRICKET", "HOCKEY"], name_section = 'results')
+		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL", "AM._FOOTBALL","HOCKEY","BASEBALL"], name_section = 'results')
 
 	if fixture_extraction_flag:
-		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL", "BASKETBALL", "AM._FOOTBALL","HOCKEY","BASEBALL"], name_section = 'fixtures')
+		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL", "AM._FOOTBALL","HOCKEY","BASEBALL"], name_section = 'fixtures')
 
 	if players_flag:
 		players(driver, ["HOCKEY"])
