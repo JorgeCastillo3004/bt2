@@ -36,7 +36,7 @@ if database_enable:
 
 def main():
 	main_extract_news_enable = False  	# 1
-	create_leagues_flag = False 	    # 2
+	create_leagues_flag = True 	    # 2
 	teams_creation_flag = True	  	    # 3
 	results_extraction_flag = True		# 4
 	fixture_extraction_flag = True		# 5
@@ -48,16 +48,16 @@ def main():
 		main_extract_news(driver, ["FOOTBALL", "TENNIS", "GOLF", "BASKETBALL", "AMERICAN_SPORTS", "MOTORSPORT", "HOCKEY", "RUGBY_UNION", "COMBAT_SPORTS"], MAX_OLDER_DATE_ALLOWED = 30)
 		# "FOOTBALL", "TENNIS", "BASKETBALL", "FEATURES", "AMERICAN_SPORTS",  "GOLF",Ready
 	if create_leagues_flag:
-		create_leagues(driver, [ "TENNIS","GOLF", "BOXING",'FORMULA 1',"FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY"])
+		create_leagues(driver, ["FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY", "TENNIS","GOLF", "BOXING",'FORMULA 1'])
 
 	if teams_creation_flag:
-		teams_creation(driver, [ "TENNIS","GOLF", "BOXING",'FORMULA 1',"FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY"]) # , "GOLF", "AM._FOOTBALL", "BASEBALL"
+		teams_creation(driver, ["FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY"])
 
 	if results_extraction_flag:
-		results_fixtures_extraction(driver, [ "TENNIS","GOLF", "BOXING",'FORMULA 1',"FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY"], name_section = 'results')
+		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY", "TENNIS","GOLF", "BOXING",'FORMULA 1'], name_section = 'results')
 
 	if fixture_extraction_flag:
-		results_fixtures_extraction(driver, [ "TENNIS","GOLF", "BOXING",'FORMULA 1',"FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY"], name_section = 'fixtures')
+		results_fixtures_extraction(driver, ["FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY", "TENNIS","GOLF", "BOXING",'FORMULA 1'], name_section = 'fixtures')
 
 	if players_flag:
 		players(driver, ["FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY"])

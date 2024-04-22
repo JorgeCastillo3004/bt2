@@ -51,7 +51,7 @@ def get_teams_info_part1(driver):
 										   'position':team_position, 'last_results': games_hist}
 	return dict_teams_availables
 
-def get_teams_info_part2(driver, sport_id, league_id, season_id, team_info):
+def get_teams_info_part2(driver, league_inf, team_info):
 	block_ligue_team = driver.find_element(By.CLASS_NAME, 'container__heading')
 	# sport = block_ligue_team.find_element(By.XPATH, './/h2[@class= "breadcrumb"]/a[1]').text
 	try:
@@ -68,45 +68,45 @@ def get_teams_info_part2(driver, sport_id, league_id, season_id, team_info):
 	image_path = random_name_logos(team_name, folder = 'images/logos/')
 	save_image(driver, image_url, image_path)
 	logo_path = image_path.replace('images/logos/','')
-	team_id = random_id()
-	instance_id = random_id()	
+	team_id = random_id_text(league_inf['sport_name'] + league_inf['league_name'] + team_name)
+	instance_id = random_id()
 	meta_dict = str({'statistics':team_info['statistics'], 'last_results':team_info['last_results']})
 	team_info = {"team_id":team_id,"team_position":team_info['position'], "team_country":team_country,"team_desc":'', 'team_logo':logo_path,\
-			 'team_name': team_name,'sport_id': sport_id, 'league_id':league_id, 'season_id':season_id,\
+			 'team_name': team_name,'sport_id': league_inf['sport_id'], 'league_id':league_inf['league_id'], 'season_id':league_inf['season_id'],\
 			 'instance_id':instance_id, 'team_meta':meta_dict, 'stadium':stadium, 'player_meta' :''}
 	return team_info
 
-def navigate_through_teams(driver, sport_id, league_id, tournament_id, season_id, section = 'standings'):
-	base_dir = 'check_points/{}/'.format(section)
-	list_files = os.listdir(base_dir)
+# def navigate_through_teams(driver, sport_id, league_id, tournament_id, season_id, section = 'standings'):
+# 	base_dir = 'check_points/{}/'.format(section)
+# 	list_files = os.listdir(base_dir)
 	
-	for file_name in list_files:
-		file_name = os.path.join(base_dir, file_name)
-		dict_teams = load_check_point(file_name)
-		count = 0
-		for team_name, team_info in dict_teams.items():
+# 	for file_name in list_files:
+# 		file_name = os.path.join(base_dir, file_name)
+# 		dict_teams = load_check_point(file_name)
+# 		count = 0
+# 		for team_name, team_info in dict_teams.items():
 
-			print("Save team statistics in database")
+# 			print("Save team statistics in database")
 			
-			wait_update_page(driver, team_info['team_url'], 'heading')
+# 			wait_update_page(driver, team_info['team_url'], 'heading')
 
-			dict_team = get_teams_info_part2(driver, sport_id, league_id, season_id, team_info)			
-			dict_team['tournament_id'] = tournament_id
-			print("Save in database teams info")			
-			save_team_info(dict_team)
-			dict_team['player_meta'] = ''
-			save_league_team_entity(dict_team)
+# 			dict_team = get_teams_info_part2(driver, sport_id, league_id, season_id, team_info)			
+# 			dict_team['tournament_id'] = tournament_id
+# 			print("Save in database teams info")			
+# 			save_team_info(dict_team)
+# 			dict_team['player_meta'] = ''
+# 			save_league_team_entity(dict_team)
 
-			squad_button = driver.find_element(By.CLASS_NAME, 'tabs__tab.squad')
-			squad_url = squad_button.get_attribute('href')
-			wait_update_page(driver, squad_url, 'heading')
-			dict_squad = get_squad_dict(driver)
-			navigate_through_players(driver, dict_squad)
-			count += 1
-			if count == 3:
-				break ### URGENT DELETE #######
-		# Remove processed file
-		os.remove(file_name)
+# 			squad_button = driver.find_element(By.CLASS_NAME, 'tabs__tab.squad')
+# 			squad_url = squad_button.get_attribute('href')
+# 			wait_update_page(driver, squad_url, 'heading')
+# 			dict_squad = get_squad_dict(driver)
+# 			navigate_through_players(driver, dict_squad)
+# 			count += 1
+# 			if count == 3:
+# 				break ### URGENT DELETE #######
+# 		# Remove processed file
+# 		os.remove(file_name)
 
 def teams_creation(driver, list_sports):
 	conf_enable_sport = check_previous_execution(file_path = 'check_points/CONFIG_M2.json')	
@@ -130,14 +130,6 @@ def teams_creation(driver, list_sports):
 	enable_sport = False
 	enable_league = False
 	enable_team = False
-
-	################################################################################
-	#			 				DRIVER CREATION AND LOGIN 						   #
-	################################################################################
-	# driver = launch_navigator('https://www.flashscore.com', database_enable)
-	# login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
-	################################################################################
-
 
 	#############################################################
 	# 				MAIN LOOP OVER LIST SPORTS 					#
@@ -178,7 +170,9 @@ def teams_creation(driver, list_sports):
 			dict_teams_db = get_dict_league_ready(sport_id = sport_id)		
 
 			for country_league, legue_info in leagues_info_json[sport_name].items():
-
+				league_inf['sport_name'] = sport_name
+				league_inf['sport_id'] = sport_id
+				league_inf['league_name'] = country_league
 				##########  ENABLE CHECK POINT LEAGUE #############
 				if league_point != '':
 					if league_point == country_league:
@@ -224,8 +218,7 @@ def teams_creation(driver, list_sports):
 							##########################################################################
 							# GET TEAM INFO PART2: team_name, team_country, complete other fields.   #
 							##########################################################################
-							dict_team = get_teams_info_part2(driver, sport_id, legue_info['league_id'],\
-														 legue_info['season_id'], team_info_url)
+							dict_team = get_teams_info_part2(driver, legue_info, team_info_url)
 							##########################################################################
 							#      CHECK IF TEAM IS CONTAINED IN DATA BASE USING dict_teams_db   	 #
 							##########################################################################

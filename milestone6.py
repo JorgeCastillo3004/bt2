@@ -32,7 +32,7 @@ def get_player_data_tennis(driver):
 	save_image(driver, image_url, image_path)
 	player_photo = image_path.replace('images/players/','')
 	
-	player_id = random_id()
+	player_id = random_id_text( player_country + player_name)
 	player_dict = {'player_id':player_id, 'player_country':player_country, 'player_dob':player_dob, 'player_name':player_name,\
 	 'player_photo':player_photo, 'player_position':''}
 	return player_dict
