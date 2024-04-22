@@ -170,9 +170,9 @@ def teams_creation(driver, list_sports):
 			dict_teams_db = get_dict_league_ready(sport_id = sport_id)		
 
 			for country_league, legue_info in leagues_info_json[sport_name].items():
-				league_inf['sport_name'] = sport_name
-				league_inf['sport_id'] = sport_id
-				league_inf['league_name'] = country_league
+				legue_info['sport_name'] = sport_name
+				legue_info['sport_id'] = sport_id
+				legue_info['league_name'] = country_league
 				##########  ENABLE CHECK POINT LEAGUE #############
 				if league_point != '':
 					if league_point == country_league:
