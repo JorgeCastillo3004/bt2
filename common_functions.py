@@ -128,7 +128,7 @@ def launch_navigator(url, headless = True):
 	options.add_argument("--disable-extensions")
 	options.add_argument("--disable-gpu")
 	options.add_argument("--disable-infobars")
-	options.add_argument("--disable-popup-blocking")
+	# options.add_argument("--disable-popup-blocking")
 	options.add_argument("--disable-web-security")
 	options.add_argument("--incognito")
 	options.add_argument("--start-maximized")
@@ -186,7 +186,7 @@ def wait_update_page(driver, url, class_name):
 
 def wait_load_detailed_news(driver, url_news):	
 	wait = WebDriverWait(driver, 10)
-	class_name = 'fsNewsArticle__title'
+	class_name = 'fsNews'
 	title = driver.find_elements(By.CLASS_NAME, class_name)
 	driver.get(url_news)
 	if len(title) == 0:
@@ -255,6 +255,18 @@ def random_id():
 	rand_id = rand_id + str(random.choice([0, 9]))
 	digits = ''.join([str(random.randint(0, 9)) for i in range(4)])
 	return rand_id+digits
+
+def random_id_text(textinput):
+    textinput = textinput.replace(' ', '')
+    unique_code = 0
+    for char in textinput:
+        unique_code = unique_code*6 + ord(char)
+    unique_code = str(unique_code)    
+    if len(unique_code) < 10:        
+        unique_code = (10 - len(unique_code))*'0' + unique_code        
+    else:
+        unique_code = unique_code[-10:]
+    return unique_code
 
 def random_id_short():
 	rand_id = ''.join(random.choice(string.ascii_lowercase) for i in range(4))
