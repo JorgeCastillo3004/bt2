@@ -12,6 +12,8 @@ from common_functions import *
 # from common_functions import utc_time_naive
 from data_base import *
 
+
+
 def get_sports_links(driver):
 	wait = WebDriverWait(driver, 10)
 	buttonmore = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'menuMinority__arrow')))
@@ -44,7 +46,7 @@ def get_sports_links(driver):
 	return dict_links
 
 def create_sport_dict(sport_mode, sport_name):
-	sport_id = random_id_short()
+	sport_id = random_id_text(sport_name)
 	sport_dict = {'sport_id' : sport_id, 'is_active' : True, 'desc_i18n' : '', 'logo' : '',\
 	'sport_mode' : sport_mode, 'name_i18n' : '', 'point_name': '', 'name':sport_name}
 	return sport_dict, sport_id
@@ -61,7 +63,9 @@ def check_pin(driver):
 	else:
 		return False
 
-def get_league_data(driver, league_team, sport_id):
+def get_league_data(driver, league_team, sport_name):
+	dict_sport_id = get_dict_sport_id()
+	sport_id = dict_sport_id[sport_name]
 	block_ligue_team = driver.find_element(By.CLASS_NAME, 'container__heading')
 	sport = block_ligue_team.find_element(By.XPATH, './/h2[@class= "breadcrumb"]/a[1]').text
 	league_country = block_ligue_team.find_element(By.XPATH, './/h2[@class= "breadcrumb"]/a[2]').text
@@ -71,7 +75,7 @@ def get_league_data(driver, league_team, sport_id):
 	image_path = random_name_logos(league_team, folder = 'images/logos/')
 	save_image(driver, image_url, image_path)
 	image_path = image_path.replace('images/logos/','')
-	league_id = random_id()
+	league_id = random_id_text(sport_name + league_team)
 	season_id = random_id()	
 	ligue_tornamen = {"sport_id":sport_id,"league_id":league_id,"season_id":season_id, 'sport':sport, 'league_country': league_country,
 					 'league_name': league_name,'season_name':season_name, 'league_logo':image_path,
@@ -92,7 +96,7 @@ def get_teams_data(driver, sport_id, league_id, season_id, team_info):
 	image_path = random_name(folder = 'images/logos/')
 	save_image(driver, image_url, image_path)
 	logo_path = image_path.replace('images/logos/','')
-	team_id = random_id()
+	team_id = random_id_text(sport_name + team_name)
 	instance_id = random_id()	
 	meta_dict = str({'statistics':team_info['statistics'], 'last_results':team_info['last_results']})
 	team_info = {"team_id":team_id,"team_position":team_info['position'], "team_country":team_country,"team_desc":'', 'team_logo':logo_path,\
@@ -256,10 +260,10 @@ def create_leagues(driver, list_sports):
 	# driver = launch_navigator('https://www.flashscore.com', database_enable)
 	# login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n")
 	# ################################################################################
-	dict_sports_url = load_json('check_points/sports_url_m2.json')
-	dict_sport_id = get_dict_sport_id() # GET DICT SPORT FROM DATABASE
+	dict_sports_url = load_json('check_points/sports_url_m2.json')	
 	sport_mode_dict = check_previous_execution(file_path = 'check_points/CONFIG_M2.json')	
 	dict_sport_info = load_check_point('check_points/leagues_info.json')
+	dict_sport_id = get_dict_sport_id()
 
 	# for sport_name, sport_info in conf_enable_sport.items():
 	# 	if sport_info['enable']:
@@ -308,7 +312,7 @@ def create_leagues(driver, list_sports):
 			pin_activate = check_pin(driver) # CHECK PIN ACTIVE.
 			if pin_activate:
 				# EXTRACT LEAGUES DATA FROM THE CURRENT URL
-				league_info = get_league_data(driver, league_name, sport_id)
+				league_info = get_league_data(driver, league_name, sport_name)
 
 				sport_leag_countr_name_db = sport_id+"_"+league_info['league_country'] +'_'+ league_info['league_name']
 				sport_leag_countr_name_json = league_info['league_country'] +'_'+ league_info['league_name']
