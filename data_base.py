@@ -164,11 +164,12 @@ def save_math_info(dict_match):
     "name": 70,
     "place": 128,
     "start_time": 1,  # No es una cadena de caracteres
-    "league_id": 40,
+    "league_id": 40,\d
     "stadium_id": 255,
     "tournament_id": 255,
     "rounds": 40,
     "season_id": 40,
+    "status": 40,
     "statistic": 1600}
 	for key, value in dict_match.items():
 		try:
