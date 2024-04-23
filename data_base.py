@@ -172,7 +172,7 @@ def save_math_info(dict_match):
     "statistic": 1600}
 	for key, value in dict_match.items():
 		try:
-			print(f"{key} {len(value)}'/'{table_dict[key]} {value}")
+			print(f"{key} {len(value)}/{table_dict[key]} {value}")
 		except:
 			print(key, value)
 	query = "INSERT INTO match VALUES(%(match_id)s, %(match_country)s, %(end_time)s,\
