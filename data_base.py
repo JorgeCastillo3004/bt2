@@ -164,7 +164,7 @@ def save_math_info(dict_match):
     "name": 70,
     "place": 128,
     "start_time": 1,  # No es una cadena de caracteres
-    "league_id": 40,\d
+    "league_id": 40,
     "stadium_id": 255,
     "tournament_id": 255,
     "rounds": 40,
