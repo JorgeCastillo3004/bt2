@@ -46,7 +46,7 @@ def main():
 	
 	if main_extract_news_enable:
 		main_extract_news(driver, ["FOOTBALL", "TENNIS", "GOLF", "BASKETBALL", "AMERICAN_SPORTS", "MOTORSPORT", "HOCKEY", "RUGBY_UNION", "COMBAT_SPORTS"], MAX_OLDER_DATE_ALLOWED = 30)
-		# "FOOTBALL", "TENNIS", "BASKETBALL", "FEATURES", "AMERICAN_SPORTS",  "GOLF",Ready
+		#  s "FOOTBALL", "TENNIS", "BASKETBALL", "FEATURES", "AMERICAN_SPORTS",  "GOLF",Ready
 	if create_leagues_flag:
 		create_leagues(driver, ["FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY", "TENNIS","GOLF", "BOXING",'FORMULA 1'])
 
