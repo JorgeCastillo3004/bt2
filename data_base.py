@@ -155,6 +155,8 @@ def get_dict_league_ready(sport_id = 'TENNIS'):
 
 ######################################## FUNCTIONS RELATED TO MATCHS ########################################
 def save_math_info(dict_match):
+	dict_match['rounds'] = ' '.join(dict_match['rounds'].split())
+
 	print("dict_match: ", dict_match['statistic'])
 	table_dict = {
     "match_id": 255,
@@ -171,11 +173,13 @@ def save_math_info(dict_match):
     "season_id": 40,
     "status": 40,
     "statistic": 1600}
+
 	for key, value in dict_match.items():
 		try:
 			print(f"{key} {len(value)}/{table_dict[key]} {value}")
 		except:
-			print(key, value)
+			print("Possible error: ")
+			print(f"key: {key}, value:{value} #")
 	query = "INSERT INTO match VALUES(%(match_id)s, %(match_country)s, %(end_time)s,\
 	 %(match_date)s, %(name)s, %(place)s, %(start_time)s, %(rounds)s, %(season_id)s, \
 	     %(status)s, %(statistic)s, %(league_id)s, %(stadium_id)s)"
@@ -214,6 +218,15 @@ def get_rounds_ready(league_id, season_id):
 
 def check_player_duplicates(player_country, player_name, player_dob):
 	query = "SELECT player_id FROM player WHERE player_country ='{}' AND player_name ='{}' AND player_dob ='{}';".format(player_country, player_name, player_dob)
+	print("Check player duplicates")
+	print(query)
+	cur = con.cursor()
+	cur.execute(query)	
+	results = [row[0] for row in cur.fetchall()]
+	return results
+
+def check_player_duplicates_id(player_id):
+	query = "SELECT player_id FROM player WHERE player_id ='{}';".format(player_id)	
 	cur = con.cursor()
 	cur.execute(query)	
 	results = [row[0] for row in cur.fetchall()]
@@ -221,6 +234,15 @@ def check_player_duplicates(player_country, player_name, player_dob):
 
 def check_team_duplicates(team_name, sport_id):
 	query = "SELECT team_id FROM team WHERE team_name ='{}' AND sport_id ='{}';".format(team_name, sport_id)
+	cur = con.cursor()
+	cur.execute(query)	
+	results = [row[0] for row in cur.fetchall()]
+	return results
+
+def check_team_duplicates_id(team_id):
+	query = "SELECT team_id FROM team WHERE team_id ='{}';".format(team_id)
+	print("check team duplicates")
+	print(query)
 	cur = con.cursor()
 	cur.execute(query)	
 	results = [row[0] for row in cur.fetchall()]
@@ -282,6 +304,13 @@ def check_match_duplicate(league_id, match_date, match_name):
 
 def get_stadium_id(place_name):
 	query = """SELECT STADIUM_ID FROM STADIUM WHERE NAME ='{}';""".format(place_name)	
+	cur = con.cursor()
+	cur.execute(query)
+	results = [row[0] for row in cur.fetchall()]
+	return results
+
+def check_stadium(stadium_id):
+	query = """SELECT STADIUM_ID FROM STADIUM WHERE stadium_id ='{}';""".format(stadium_id)	
 	cur = con.cursor()
 	cur.execute(query)
 	results = [row[0] for row in cur.fetchall()]

@@ -50,6 +50,46 @@ def get_all_player_info_tennis(driver):
 	return dict_info
 
 #####################################################################
+#					GOLF PLAYER INFO EXTRACTION 					#
+#####################################################################
+def get_player_data_golf(driver):
+    dict_player_full_info = get_all_player_info_golf(driver)    
+
+    profile_block = driver.find_element(By.XPATH, '//div[@class="tournamentHeader__participantHeaderWrap"]')
+    player_country = driver.find_element(By.XPATH, '//span[@class="golfSummaryTab__flag"]/span').get_attribute("title")
+    if 'Date of Birth' in dict_player_full_info.keys():
+        date_str = dict_player_full_info['Date of Birth'].replace(' ', '')
+        print("date_str: ", date_str)
+        player_dob = datetime.strptime(date_str, "%d.%m.%Y")
+    else:
+        player_dob = datetime.strptime('01.01.1900', "%d.%m.%Y") 
+
+    player_name = profile_block.find_element(By.XPATH, './/div[@class="tournamentHeader__participantNameWrap"]').text
+    player_name = clean_field(player_name)
+
+    image_url = profile_block.find_element(By.XPATH, './/img').get_attribute('src')
+    image_path = random_name_logos(player_name, folder = 'images/players/')	
+    save_image(driver, image_url, image_path)
+    player_photo = image_path.replace('images/players/','')
+
+    player_id = random_id_text( player_country + player_name)
+    player_dict = {'player_id':player_id, 'player_country':player_country, 'player_dob':player_dob, 'player_name':player_name,\
+     'player_photo':player_photo, 'player_position':''}
+    return player_dict
+
+def get_all_player_info_golf(driver):
+    player_block = driver.find_element(By.XPATH, '//div[@class="tournamentHeader__participantHeaderWrap"]')
+    lines = player_block.find_elements(By.XPATH, './/div[contains(@class, "tournamentHeader__participantHeaderInfo")]')
+    dict_info = {}
+    for line in lines:
+        print("Curren_line: ",line.text, "#")
+        if len(line.text) != 0 and ":" in line.text:
+            tag, field = line.text.split(":")
+            dict_info[tag] = field
+    dict_info
+    return dict_info
+
+#####################################################################
 #					SQUAD INFO EXTRACTION 							#
 #####################################################################
 
