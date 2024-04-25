@@ -90,6 +90,45 @@ def get_all_player_info_golf(driver):
     return dict_info
 
 #####################################################################
+#					BOXING PLAYER INFO EXTRACTION 					#
+#####################################################################
+def get_player_data_boxing(driver):
+    dict_player_full_info = get_all_player_info_boxing(driver)    
+
+    profile_block = driver.find_element(By.XPATH, '//div[@class="container__heading"]')
+    player_country = profile_block.find_element(By.XPATH, './/span[@class="breadcrumb__text"]').text
+    if 'age' in dict_player_full_info.keys():
+        date_str = dict_player_full_info['age'].split()[1].replace('(','').replace(')','')
+        player_dob = datetime.strptime(date_str, "%d.%m.%Y")
+    else:
+        player_dob = datetime.strptime('01.01.1900', "%d.%m.%Y") 
+
+    player_name = profile_block.find_element(By.XPATH, './/div[@class="heading__name"]').text
+    player_name = clean_field(player_name)
+
+    image_url = profile_block.find_element(By.XPATH, './/img').get_attribute('src')
+    image_path = random_name_logos(player_name, folder = 'images/players/')	
+    save_image(driver, image_url, image_path)
+    player_photo = image_path.replace('images/players/','')
+
+    player_id = random_id_text( player_country + player_name)
+    player_dict = {'player_id':player_id, 'player_country':player_country, 'player_dob':player_dob, 'player_name':player_name,\
+     'player_photo':player_photo, 'player_position':''}
+    return player_dict
+
+def get_all_player_info_boxing(driver):
+    player_block = driver.find_element(By.XPATH, '//div[@class="container__heading"]')
+    lines = player_block.find_elements(By.XPATH, './/div[contains(@class, "heading__info")]')  # [contains(text(), "Age")]/span'
+    dict_info = {}
+    for line in lines:
+        print("Curren_line: ",line.text, "#")
+        if len(line.text) != 0 and ":" in line.text:
+            tag, field = line.text.split(":")
+            dict_info[tag] = field
+    return dict_info
+
+
+#####################################################################
 #					SQUAD INFO EXTRACTION 							#
 #####################################################################
 
