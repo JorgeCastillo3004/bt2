@@ -36,7 +36,7 @@ if database_enable:
 
 def main():
 	main_extract_news_enable = False  	# 1
-	create_leagues_flag = True 	    # 2
+	create_leagues_flag = False 	    # 2
 	teams_creation_flag = False	  	    # 3
 	results_extraction_flag = False		# 4
 	fixture_extraction_flag = True		# 5
@@ -58,7 +58,7 @@ def main():
 		results_fixtures_extraction(driver, ["TENNIS","GOLF", "FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY", "BOXING",'FORMULA 1'], name_section = 'results')
 
 	if fixture_extraction_flag:
-		results_fixtures_extraction(driver, ["BOXING", "TENNIS","GOLF", "FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY", "BOXING",'FORMULA 1'], name_section = 'fixtures')
+		results_fixtures_extraction(driver, ["TENNIS","GOLF", "FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY", "BOXING",'FORMULA 1'], name_section = 'fixtures')
 
 	if players_flag:
 		players(driver, ["FOOTBALL", "BASKETBALL","BASEBALL", "AM. FOOTBALL", "HOCKEY"])
