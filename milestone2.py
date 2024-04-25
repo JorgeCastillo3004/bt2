@@ -82,6 +82,27 @@ def get_league_data(driver, league_team, sport_name):
 					  'league_name_i18n':'', 'season_end':datetime.now(), 'season_start':datetime.now()}
 	return ligue_tornamen
 
+
+def get_league_data_boxing(driver, league_team, sport_name):
+	print(f"league_team:{league_team}, sport_name: {sport_name}")
+	dict_sport_id = get_dict_sport_id()
+	sport_id = dict_sport_id[sport_name]
+	block_ligue_team = driver.find_element(By.CLASS_NAME, 'container__heading')
+	sport = block_ligue_team.find_element(By.XPATH, './/h2[@class= "breadcrumb"]/a[1]').text
+	# league_country = block_ligue_team.find_element(By.XPATH, './/h2[@class= "breadcrumb"]/a[2]').text
+	league_name = block_ligue_team.find_element(By.CLASS_NAME,'heading__title').text
+	season_name = block_ligue_team.find_element(By.CLASS_NAME, 'heading__info').text
+	image_url = block_ligue_team.find_element(By.XPATH, './/div[@class= "heading"]/img').get_attribute('src')
+	image_path = random_name_logos(league_team, folder = 'images/logos/')
+	save_image(driver, image_url, image_path)
+	image_path = image_path.replace('images/logos/','')
+	league_id = random_id_text(sport_name + league_team)
+	season_id = random_id()	
+	ligue_tornamen = {"sport_id":sport_id,"league_id":league_id,"season_id":season_id, 'sport':sport, 'league_country': '',
+					 'league_name': league_name,'season_name':season_name, 'league_logo':image_path,
+					  'league_name_i18n':'', 'season_end':datetime.now(), 'season_start':datetime.now()}
+	return ligue_tornamen
+
 def get_teams_data(driver, sport_id, league_id, season_id, team_info):
 	block_ligue_team = driver.find_element(By.CLASS_NAME, 'container__heading')
 
@@ -124,6 +145,30 @@ def find_ligues_torneos(driver):
 			league_url = league.get_attribute('href')
 			dict_liguies[('_'.join(league_url.split('/')[-3:-1])+gender).upper()] = league_url
 	return dict_liguies
+
+def find_categories(driver):
+	wait = WebDriverWait(driver, 5)
+	xpath_expression = '//div[@id="my-leagues-list"]'
+	leagues_info = wait.until(EC.visibility_of_element_located((By.XPATH, xpath_expression)))
+	dict_liguies = {}
+	if not "To select your leagues " in leagues_info.text:
+		# ligues = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@id="my-leagues-list"]/div/div/a')))        
+		leagues = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//div[@id="my-leagues-list"]/div/div/a')))		
+		# ligues = driver.find_elements(By.XPATH, '//div[@id="my-leagues-list"]/div/div/a')
+		# print(len(ligues))
+		gender = ''
+		for league in leagues:
+			print("League name: ")
+			print(league.text)
+			if '#man' in league.get_attribute('outerHTML'):
+				gender = "_man"
+			if '#woman' in league.get_attribute('outerHTML'):
+				gender = "_woman"
+			# dict_liguies['_'.join(ligue.text.split())+gender] = ligue.get_attribute('href')
+			league_url = league.get_attribute('href')
+			dict_liguies[('_'.join(league_url.split('/')[-3:-1])+gender).upper()] = league_url
+	return dict_liguies
+
 
 def get_result_basketball(row):
 	date = row.find_element(By.CLASS_NAME, 'event__time').text
@@ -289,8 +334,9 @@ def create_leagues(driver, list_sports):
 		###################################################################
 		#				SECTION GET CURRENT LEAGUES						  #
 		###################################################################		
-		wait_update_page(driver, dict_sports_url[sport_name], "container__heading")			
-		new_dict_leagues = find_ligues_torneos(driver)			
+		wait_update_page(driver, dict_sports_url[sport_name], "container__heading")
+		
+		new_dict_leagues = find_ligues_torneos(driver)
 
 		###################################################################
 		#		CHECK IF SPORT WAS SAVED PREVIOUSLY						  #
@@ -312,7 +358,14 @@ def create_leagues(driver, list_sports):
 			pin_activate = check_pin(driver) # CHECK PIN ACTIVE.
 			if pin_activate:
 				# EXTRACT LEAGUES DATA FROM THE CURRENT URL
-				league_info = get_league_data(driver, league_name, sport_name)
+				if sport_name == 'BOXING':					
+					print_section("BOXING CASE")
+					league_info = get_league_data_boxing(driver, league_name, sport_name)
+				else:
+					league_info = get_league_data(driver, league_name, sport_name)
+
+				print_section("LEAGUE INFO")
+				print(league_info)
 
 				sport_leag_countr_name_db = sport_id+"_"+league_info['league_country'] +'_'+ league_info['league_name']
 				sport_leag_countr_name_json = league_info['league_country'] +'_'+ league_info['league_name']
