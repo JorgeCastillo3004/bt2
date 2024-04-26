@@ -132,7 +132,7 @@ def extract_info_results(driver, start_index, results_block, section_name, count
     #########################################################
     #               LOOP OVER ALL MATCH                     #
     #########################################################
-    for processed_index,   in enumerate(results_block[start_index:]):
+    for processed_index, result in enumerate(results_block[start_index:]):
         print(result.text.replace('\n',' '))
         HTML = result.get_attribute('outerHTML')
         if 'event__round event__round--static' in HTML or 'event__header' in HTML: # TAKE ROUND NAME            
