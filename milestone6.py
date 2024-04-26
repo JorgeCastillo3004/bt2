@@ -78,16 +78,19 @@ def get_player_data_golf(driver):
     return player_dict
 
 def get_all_player_info_golf(driver):
-    player_block = driver.find_element(By.XPATH, '//div[@class="tournamentHeader__participantHeaderWrap"]')
-    lines = player_block.find_elements(By.XPATH, './/div[contains(@class, "tournamentHeader__participantHeaderInfo")]')
     dict_info = {}
-    for line in lines:
-        print("Curren_line: ",line.text, "#")
-        if len(line.text) != 0 and ":" in line.text:
-            tag, field = line.text.split(":")
-            dict_info[tag] = field
-    dict_info
-    return dict_info
+    try:
+        player_block = driver.find_element(By.XPATH, '//div[@class="tournamentHeader__participantHeaderWrap"]')
+        lines = player_block.find_elements(By.XPATH, './/div[contains(@class, "tournamentHeader__participantHeaderInfo")]')
+        
+        for line in lines:
+            print("Curren_line: ",line.text, "#")
+            if len(line.text) != 0 and ":" in line.text:
+                tag, field = line.text.split(":")
+                dict_info[tag] = field
+        return dict_info
+    except:        
+        return dict_info
 
 #####################################################################
 #					BOXING PLAYER INFO EXTRACTION 					#
