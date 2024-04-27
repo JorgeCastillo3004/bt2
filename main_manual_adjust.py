@@ -35,7 +35,7 @@ if database_enable:
 	con = getdb()
 
 def main():
-	main_extract_news_enable = False  	# 1
+	main_extract_news_enable = True  	# 1
 	create_leagues_flag = False 	    # 2
 	teams_creation_flag = False	  	    # 3
 	results_extraction_flag = False		# 4
