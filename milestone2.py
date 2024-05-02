@@ -322,7 +322,7 @@ def find_categories_motor_sport(driver, list_enables):
             dict_categories_info[category_name.upper()] = {'url':link, 
             'standing_link':'https://www.flashscore.com/motorsport/championship-standings/f1/'}            
     # dict_categories_info['FORMULA 1']['calendar_link'] = calendar_f1_link
-    dict_categories_info['FORMULA 1']['calendar_link'] = 'https://www.flashscore.com/motorsport/championship-standings/f1/'
+    dict_categories_info['FORMULA 1']['calendar_link'] = 'https://www.flashscore.com/motorsport/calendar/f1/'
     return dict_categories_info
 
 def get_racer_info(driver):

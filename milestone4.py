@@ -990,6 +990,7 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
                         print("Start extraction to BOXING SPORT")
                         extract_info_boxing(driver, league_info)
                     elif sport_name == 'MOTOR SPORT' and league_name =='FORMULA 1':
+                        print("FORMULA 1 INICIO EXTRACCION")
                         category_info = leagues_info_json["MOTOR SPORT"]['FORMULA 1']
                         wait_update_page(driver, category_info['calendar_link'], "container__heading")
                         grand_prix_links = get_grand_prix_links(driver)
