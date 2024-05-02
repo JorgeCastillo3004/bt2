@@ -298,6 +298,7 @@ def get_sections_links(driver):
 
 ################################ MOTOR SPORT SECTION #########################################################
 def find_categories_motor_sport(driver, list_enables):    
+    driver.execute_script("document.body.style.zoom='50%'")
     wait = WebDriverWait(driver, 10)
     categories_block = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "lmc__menu")))
 
