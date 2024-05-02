@@ -26,9 +26,13 @@ def get_time_date_format(date, section ='results'):
         cleaned_text = re.findall(r'\d+\.\d+\.\d+\s+\d+\:\d+', date)[0]
         dt_object = datetime.strptime(cleaned_text, '%d.%m.%Y %H:%M')
     except:
-        cleaned_text = re.findall(r'\d+\.\d+\.\s+\d+\:\d+', date)[0]
-        dt_object = datetime.strptime(cleaned_text, '%d.%m. %H:%M')
-        dt_object = dt_object.replace(year=year_)
+        try:
+            cleaned_text = re.findall(r'\d+\.\d+\.\s+\d+\:\d+', date)[0]
+            dt_object = datetime.strptime(cleaned_text, '%d.%m. %H:%M')
+            dt_object = dt_object.replace(year=year_)
+        except:
+            cleaned_text = ''.join(re.findall(r'(\d+\.\d+\.)\-\d+\.\d+\.(\d+)', date)[0])
+            dt_object = datetime.strptime(cleaned_text, '%d.%m.%Y')
     dt_object = dt_object + time_difference_naive
     # Extract date and time
     date = dt_object.date()
@@ -803,6 +807,10 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
     #               MAIN LOOP OVER LIST SPORTS                  #
     #############################################################
     for sport_name in list_sports:
+        if sport_name == 'FORMULA 1':
+            sport_name = 'MOTOR SPORT'
+            league_name = 'FORMULA 1'
+
         if sport_name in global_check_point.keys():
             if 'M4' in global_check_point[sport_name].keys():               
                 league_point = global_check_point[sport_name]['M4']['league']
@@ -826,7 +834,7 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
         print_section(sport_name, space_ = 50)
         #############################################################
         #               MAIN LOOP OVER LEAGUES                      #
-        #############################################################       
+        #############################################################
         
         for league_name, league_info in leagues_info_json[sport_name].items():
                 print_section(league_name, space_ = 50)
@@ -844,17 +852,22 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
                 #                                                                   #
                 #               get_dict_league_ready                               #
                 #####################################################################
-                path_league_info = 'check_points/leagues_season/{}/{}.json'.format(sport_name, league_name)
-                print("League_id, season_id: ", league_info['league_id'], league_info['season_id'])
-                # save in the same dict league_name, sport_name
-                league_info['league_name'] = league_name
-                league_info['sport_name'] = sport_name
-                league_info['sport_id'] = dict_sport_id[sport_name]             
-                print(league_info)
-                # list_rounds = get_rounds_ready(league_info['league_id'], league_info['season_id'])
-                list_rounds = []
-                print("List old round from db ", list_rounds)
-                print("File to be search: ", path_league_info)
+                # Exception for formula 1
+                if sport_name != 'MOTOR SPORT':
+                    # sport_name == 'MOTOR SPORT'
+                    # league_name = 'FORMULA 1'
+
+                    path_league_info = 'check_points/leagues_season/{}/{}.json'.format(sport_name, league_name)
+                    print("League_id, season_id: ", league_info['league_id'], league_info['season_id'])
+                    # save in the same dict league_name, sport_name
+                    league_info['league_name'] = league_name
+                    league_info['sport_name'] = sport_name
+                    league_info['sport_id'] = dict_sport_id[sport_name]             
+                    print(league_info)
+                    # list_rounds = get_rounds_ready(league_info['league_id'], league_info['season_id'])
+                    list_rounds = []
+                    print("List old round from db ", list_rounds)
+                    print("File to be search: ", path_league_info)
 
                 
                 # check_point_flag = get_check_point(check_point, sport_id, country_league)
@@ -870,17 +883,19 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
                 #############################################################
                 #   SECTION TO CHECK SPORT MODALITY TEAMS OR INDIVIDUAL     #
                 #############################################################
-                if sport_name in ['TENNIS', 'GOLF','BOXING']:
+                print(f"{sport_name} {league_name}")
+                if sport_name in ['TENNIS', 'GOLF','BOXING', 'MOTOR SPORT']:
+                    print("Case individual sports")
                     individual_sport = True
                     flag_to_continue = True
                 else:
+                    print('Other sports')
                     individual_sport = False
                     flag_to_continue = os.path.isfile(path_league_info) # CONFIRM IF TEAM WAS CREATED
+                    dict_league = load_check_point(path_league_info)
+                    print("List of teams: ", list(dict_league.keys()))
                 if not flag_to_continue:
-                    print_section("FILE NOT FOUND", space_ = 40)                    
-                dict_league = load_check_point(path_league_info)
-
-                print("List of teams: ", list(dict_league.keys()))
+                    print_section("FILE NOT FOUND", space_ = 40)
                 
                 if flag_to_continue and enable_league:
 
@@ -974,9 +989,145 @@ def results_fixtures_extraction(driver, list_sports, name_section = 'results'):
                     elif sport_name == 'BOXING':
                         print("Start extraction to BOXING SPORT")
                         extract_info_boxing(driver, league_info)
+                    elif sport_name == 'MOTOR SPORT' and league_name =='FORMULA 1':
+                        category_info = leagues_info_json["MOTOR SPORT"]['FORMULA 1']
+                        wait_update_page(driver, category_info['calendar_link'], "container__heading")
+                        grand_prix_links = get_grand_prix_links(driver)
+                        for grand_prix_link in grand_prix_links:
+                            print(grand_prix_link)
+                            wait_update_page(driver, grand_prix_link, "container__heading")
+                            
+                            season_year = driver.find_element(By.CLASS_NAME, 'heading__info').text
+                            
+                            if season_year== '2024':
+                                print("Current season")
+                                create_events_f1(driver, category = 'FORMULA 1', season_year = '2024')
+                            else:
+                                break
 
     del global_check_point[sport_name]['M4']
     save_check_point('check_points/global_check_point.json', global_check_point)
+
+
+def build_detail_score_dict(racer, dict_match):
+    position, name, team, points = racer.find_elements(By.XPATH, './div')
+    name = name.find_element(By.XPATH, './div/div/a').text
+    position = position.text.replace('.','').replace(' ','')
+    points.text
+    team_id = random_id_text("MOTOR SPORT" + team.text+ name)
+    dict_detail_score = {'match_detail_id': random_id() , 'home': False, 'visitor': False,
+                             'match_id':dict_match['match_id'],'team_id':'',
+                         'points':points, 'score_id':random_id()
+                            }
+    return dict_detail_score
+
+def build_match_dict(driver, block_match, season_year, category):
+    # DATE TIME AND STATUS 
+    date_time = block_match.find_element(By.XPATH, './/span[@data-testid="wcl-simpleText1"]').text
+    race_info = block_match.find_element(By.CLASS_NAME, "event__header.event__header--info").text.split(',')
+
+    if len(race_info)== 4:
+        date_time, place, descr, descr2  = race_info
+        descr = descr + ',' + descr2
+
+    if len(race_info)== 3:
+        date_time, place, descr  = race_info        
+
+    if 'Finished' in date_time:
+        match_date, start_time = get_first_date_with_year(date_time)
+        status = 'R'        
+        place = clean_text(place)
+        descr = clean_text(descr)
+    else:
+        match_date, start_time = get_time_date_format(date_time, section ='results')
+        status = 'P'         
+    
+    place = clean_text(place)
+    descr = clean_text(descr)
+
+    grand_prix_title = block_match.find_element(By.XPATH, './/div[@class="event__titleBox"]').text
+    grand_prix_title = ' '.join(grand_prix_title.split())
+    match_country =  re.findall( r'\((.*?)\)', grand_prix_title)[0]
+    
+    
+    
+    # BUILD STADIUM DICT = AUTODROME_DICT
+    autodrome_dict = {"stadium_id": random_id_text(place),
+                        "capacity": 0,
+                        "country": match_country,
+                        "desc_i18n": descr,
+                        "name": place,
+                        "photo": ""
+                        }
+    
+    # BUILD MATCH DICT
+    dict_match = {'match_id':random_id_text(grand_prix_title + season_year), 'match_country':match_country, 'end_time':start_time,
+                  'match_date':match_date, 'name':grand_prix_title,'start_time':start_time, 
+                  'place':place, 'rounds':'',
+                  'season_id':random_id_text(category + season_year),
+                  'status':status, 'statistic':'',
+                  'league_id':random_id_text("MOTOR SPORT" + category), 'stadium_id': autodrome_dict['stadium_id']
+                 }
+    return autodrome_dict, dict_match
+
+def create_events_f1(driver, category = 'FORMULA 1', season_year = '2024'):
+
+    block_matchs = driver.find_elements(By.CLASS_NAME, "sportName--noDuel.motorsport-auto-racing")
+
+    print(len(block_matchs))
+    
+    for block_match in block_matchs:  
+        title_event = block_match.find_element(By.CLASS_NAME, 'event__titleBox').text
+        if 'Race' in title_event:
+            print("title_event: ", title_event)
+            # GET AUTODROME=STADIUM_ID, MATCH DICT
+            list_fields = block_match.find_elements(By.XPATH, './div[@class="event__match event__main event__match--noDuel"]/div')
+            list_fields = [field.text for field in list_fields]    
+
+            autodrome_dict, dict_match = build_match_dict(driver, block_match, season_year, category)        
+            print_section(f"{dict_match['name']} {dict_match['match_id']} ")
+            if not check_stadium(autodrome_dict['stadium_id']):
+                print("Create new stadium autodrome")        
+                save_stadium(autodrome_dict)
+
+            # CHECK DUPLICATES AND SAVE AUTODROME AND MATCH.
+            if not get_match_ready(dict_match['match_id']):
+                print("Create new match")
+                save_math_info(dict_match)
+
+            # GET PARTICIPANS MATCH DETAILS MATCH SCORE.
+            racer_rows = block_match.find_elements(By.XPATH, './div[@title="Click for details!"]')
+            for racer in racer_rows:
+                list_contain = racer.find_elements(By.XPATH, './div')        
+                list_contain = [field.text for field in list_contain]        
+                if len(list_contain)==8: 
+                    list_contain = list_contain[1:]        
+
+                dict_result = dict(zip(list_fields, list_contain))
+
+                print_section("crear team id")
+                print(f"#{dict_result['TEAM']}#")
+                if dict_result['TEAM'] == 'RB':
+                    dict_result['TEAM'] = 'RB (F1 Team)'
+                team_id = get_team_id_pilot(dict_result['DRIVER'], dict_result['TEAM'])
+                print(dict_result)
+
+    #             print(f"TEAM: {dict_result['#']} {dict_result['TEAM']} driver: {dict_result['DRIVER']}")
+                print("team_id: ", team_id)
+                dict_match_detail = {'match_detail_id':random_id(),'home':False, 'visitor':False,
+                                    'match_id':dict_match['match_id'], 'team_id':team_id,
+                                    'score_id':random_id(), 'points':f1_puntuation(dict_result['#'])}
+
+                # INPUT VAR: team_id, match_id, dict_match['match_id']
+                save_details_math_info(dict_match_detail)
+                save_score_info(dict_match_detail)
+
+def get_grand_prix_links(driver):
+    list_links = driver.find_elements(By.XPATH, '//td[@class="seasonCalendar__name"]/a')
+    grand_prix_links = []
+    for link in list_links:    
+        grand_prix_links.append(link.get_attribute('href'))
+    return grand_prix_links
 
 def get_match_link(driver, match):
     dict_match = {}

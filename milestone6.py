@@ -130,7 +130,6 @@ def get_all_player_info_boxing(driver):
             dict_info[tag] = field
     return dict_info
 
-
 #####################################################################
 #					SQUAD INFO EXTRACTION 							#
 #####################################################################
