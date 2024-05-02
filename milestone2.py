@@ -305,19 +305,24 @@ def find_categories_motor_sport(driver, list_enables):
     calendar = driver.find_element(By.CLASS_NAME, 'leftMenu.menu.leftMenu--seasonCalendar')
     calendar_f1_link = calendar.find_element(By.XPATH, '..//div[@class="leftMenu__item"]/a').get_attribute('href')
     
-    list_categories = categories_block.find_elements(By.CLASS_NAME, 'lmc__block ')    
+    list_categories = categories_block.find_elements(By.CLASS_NAME, 'lmc__block ')
     dict_categories_info = {}
     for category_block in list_categories:
         category_name = category_block.find_element(By.XPATH, './/span[@class="lmc__elementName"]').text    
         if category_name.upper() in list_enables:
             link = category_block.find_element(By.XPATH, './/a').get_attribute('href')
-            expand = category_block.find_element(By.CLASS_NAME, 'lmc__element.lmc__item ')
-            expand.click()
-            wait2 = wait = WebDriverWait(category_block, 10)
-            standing_link = wait2.until(EC.element_to_be_clickable((By.CLASS_NAME, "lmc__template.lmc__templateRank")))
+    #         wait2 = WebDriverWait(category_block, 10)
+    #         # expand = category_block.find_element(By.CLASS_NAME, 'lmc__element.lmc__item ')
+    #         expand = wait2.until(EC.element_to_be_clickable((By.CLASS_NAME, 'lmc__element.lmc__item ')))
+    #         expand.click()
+    #         wait2 = wait = WebDriverWait(category_block, 10)
+    #         standing_link = wait2.until(EC.element_to_be_clickable((By.CLASS_NAME, "lmc__template.lmc__templateRank")))
+            # dict_categories_info[category_name.upper()] = {'url':link, 
+            # 'standing_link':standing_link.get_attribute('href')}            
             dict_categories_info[category_name.upper()] = {'url':link, 
-            'standing_link':standing_link.get_attribute('href')}            
-    dict_categories_info['FORMULA 1']['calendar_link'] = calendar_f1_link
+            'standing_link':'https://www.flashscore.com/motorsport/championship-standings/f1/'}            
+    # dict_categories_info['FORMULA 1']['calendar_link'] = calendar_f1_link
+    dict_categories_info['FORMULA 1']['calendar_link'] = 'https://www.flashscore.com/motorsport/championship-standings/f1/'
     return dict_categories_info
 
 def get_racer_info(driver):
