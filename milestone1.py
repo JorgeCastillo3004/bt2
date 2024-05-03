@@ -184,7 +184,7 @@ def click_show_more_news(driver, max_older_news, max_click_more = 5):
 
 def get_news_info_v2(driver, dict_news):	
 	wait = WebDriverWait(driver, 10)
-	image = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@class="imageContainer__element"]/figure/picture/img')))
+	image = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@class="imageContainer"]/figure/picture/img')))
 	image_url = image.get_attribute('src')
 	articlebody = driver.find_element(By.CLASS_NAME, 'fsNewsArticle__content')
 	summary = articlebody.find_element(By.XPATH, './/div[@class="fsNewsArticle__perex"]')
@@ -224,6 +224,7 @@ def extract_news_info(driver):
 			print("-", index, '/',len(input_dict), end= ' ')
 			current_url = current_dict['news_link']
 			wait_load_detailed_news(driver, current_url)
+			print("current_dict: ",current_dict)
 			dict_news = get_news_info_v2(driver, current_dict)
 			dict_news['published'] = process_date(dict_news['published'])
 			print("Insert news in db")
