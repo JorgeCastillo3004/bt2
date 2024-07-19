@@ -1,6 +1,3 @@
 selenium
-chromedriver_autoinstaller
-pandas
 psycopg2
 requests
-unicode
