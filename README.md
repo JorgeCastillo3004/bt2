@@ -18,10 +18,9 @@ sudo apt install firefox
 Download the latest version of GeckoDriver and make it executable.
 ```
 # Download the latest version of GeckoDriver
-```bash
 check availables versions:
-
 https://github.com/mozilla/geckodriver/releases
+```bash
 wget https://github.com/mozilla/geckodriver/releases/download/v0.34.0/geckodriver-v0.34.0-linux-aarch64.tar.gz
 ```
 # Extract the tar file
