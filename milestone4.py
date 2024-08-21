@@ -40,13 +40,19 @@ def get_time_date_format(date, section ='results'):
     return date, time
 
 def get_result(row, section = 'results'):
+    print("################ INSIDE GET RESULT ################")
+    print("Row: ", row.text)
+    home_xpath_expression = ".//div[contains(@class, 'homeParticipant')]"
+    away_xpath_expression = ".//div[contains(@class, 'awayParticipant')]"
     match_date = row.find_element(By.CLASS_NAME, 'event__time').text    
     try:
-        home_participant = row.find_element(By.CLASS_NAME, 'event__participant.event__participant--home.fontExtraBold').text
+        # home_participant = row.find_element(By.CLASS_NAME, 'event__participant.event__participant--home.fontExtraBold').text        
+        home_participant = row.find_element(By.XPATH, home_xpath_expression).text
     except:
         home_participant = row.find_element(By.CLASS_NAME, 'event__participant.event__participant--home').text
-    try:    
-        away_participant = row.find_element(By.CLASS_NAME, 'event__participant.event__participant--away.fontExtraBold').text
+    try:
+        away_participant = row.find_element(By.XPATH, away_xpath_expression).text
+        # away_participant = row.find_element(By.CLASS_NAME, 'event__participant.event__participant--away.fontExtraBold').text
     except:
         away_participant = row.find_element(By.CLASS_NAME, 'event__participant.event__participant--away').text
 
@@ -63,6 +69,8 @@ def get_result(row, section = 'results'):
     result_dict = {'match_id':match_id,'match_date':match_date,'start_time':'', 'end_time':'',\
                     'name':home_participant + '-' + away_participant,'home':home_participant,'visitor':away_participant,\
                     'home_result':home_result,  'visitor_result':away_result, 'link_details':url_details,'place':''}
+    print("Result dict: ", result_dict)
+    
     return result_dict
 
 def get_unique_key(id_section_new, list_keys):
@@ -150,8 +158,9 @@ def extract_info_results(driver, start_index, results_block, section_name, count
                 list_index[0] = processed_index + 1
                 if not 'event__header' in HTML:
                     count = 1
-        if 'Click for match detail!' in HTML: # EXTRACT MATHC INFO
+        if 'Click for match detail!' in HTML: # EXTRACT MATCH INFO
             result = get_result(result, section = section_name)
+            print("Result: ", result)
             all_list_results.append(result)
         else:
             all_list_results.append('')
@@ -266,6 +275,7 @@ def navigate_through_rounds(driver, country_league, list_rounds ,section_name = 
         print("last_procesed_index: ", last_procesed_index)
         
         last_procesed_index, click_more_enable = extract_info_results(driver, last_procesed_index, current_results, section_name, country_league, list_rounds)
+        click_more_enable = False
         if click_more_enable:
             more_rounds_loaded = click_show_more_rounds(driver, current_results, section_name) # UNCOMENT ## URGENT DELETE      
             print("Len list results not updated: ", len(current_results))
@@ -1176,7 +1186,7 @@ def extract_info_boxing(driver, league_info):
     wait_update_page(driver, league_info['url'], "container__heading")    
 
     # EXTRACT ALL MATCH BLOCKS
-    list_match  = driver.find_elements(By.XPATH, '//div[@title="Click for match detail!"]')    
+    list_match  = driver.find_elements(By.XPATH, '//div[@title="Click for match detail!"]')
     dict_matchs_link = {}
     # for event_block in event_blocks:
     for key, match in enumerate(list_match):

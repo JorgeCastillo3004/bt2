@@ -6,13 +6,9 @@ from selenium.webdriver.common.by import By
 import time
 import psycopg2
 import shutil
-
 from common_functions import *
-# from main import database_enable
-# from common_functions import utc_time_naive
+
 from data_base import *
-
-
 
 def get_sports_links(driver):
     wait = WebDriverWait(driver, 10)
@@ -73,13 +69,15 @@ def get_league_data(driver, league_team, sport_name):
     season_name = block_ligue_team.find_element(By.CLASS_NAME, 'heading__info').text
     image_url = block_ligue_team.find_element(By.XPATH, './/div[@class= "heading"]/img').get_attribute('src')
     image_path = random_name_logos(league_team, folder = 'images/logos/')
-    save_image(driver, image_url, image_path)
+    # save_image(driver, image_url, image_path)
+
     image_path = image_path.replace('images/logos/','')
     league_id = random_id_text(sport_name + league_team)
     season_id = random_id() 
     ligue_tornamen = {"sport_id":sport_id,"league_id":league_id,"season_id":season_id, 'sport':sport, 'league_country': league_country,
                      'league_name': league_name,'season_name':season_name, 'league_logo':image_path,
-                      'league_name_i18n':'', 'season_end':datetime.now(), 'season_start':datetime.now()}
+                      'league_name_i18n':'', 'season_end':datetime.now(), 'season_start':datetime.now(),
+                      'image_url':image_url, 'image_path':image_path}
     return ligue_tornamen
 
 def get_league_data_boxing(driver, league_team, sport_name):
@@ -592,6 +590,7 @@ def create_leagues(driver, list_sports):
                         print("League id from db: ", league_id)
                     else:
                         enable_save = True
+                        save_image(driver, league_info['image_url'], league_info['image_path'])
                         # print(" "*(60-len(sport_leag_countr_name_json)), " NEW LEAGUE")
                         print_section(" NEW LEAGUE", space_ = 10)
                         print(sport_leag_countr_name_json)

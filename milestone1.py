@@ -5,8 +5,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 from common_functions import *
-# from main import database_enable
-# from common_functions import utc_time_naive
 from data_base import *
 
 def get_list_recent_news(driver, max_older_news, last_index, last_date_saved):	
@@ -29,7 +27,8 @@ def get_list_recent_news(driver, max_older_news, last_index, last_date_saved):
 		# FIND NECESSARY FIELDS 
 		image = wait.until(EC.element_to_be_clickable((By.XPATH, './/figure/picture/img')))
 		news_link = block.get_attribute('href')
-		news_date = block.find_element(By.XPATH, './/span[@data-testid="wcl-newsMetaInfo-date"]').text		
+		# news_date = block.find_element(By.XPATH, './/span[@data-testid="wcl-newsMetaInfo-date"]').text		
+		news_date = block.find_element(By.XPATH, './/div[@data-testid="wcl-newsMetaInfo"]').text
 		news_timestamp = process_date(news_date) # return news time in UTC.
 		
 		# SET THE MAXIMUM ALLOWABLE OLDER DATE
@@ -37,8 +36,8 @@ def get_list_recent_news(driver, max_older_news, last_index, last_date_saved):
 		    old_date = datetime.strptime(last_date_saved, '%Y-%m-%d %H:%M:%S')
 		else:
 		    old_date = utc_time_naive - timedelta(days=max_older_news)
-
-		title = block.find_element(By.XPATH, './/div[@role="heading"]').text
+		
+		title = block.find_element(By.XPATH, './/*[@role="heading"]').text
 		image = image.get_attribute('src')		
 		# image_url = block.find_element(By.XPATH, './/figure/picture/source').get_attribute('srcset').split(', ')[0]
 		# image_url = re.sub(r'\s+\d+\w','', image_url)
@@ -52,7 +51,9 @@ def get_list_recent_news(driver, max_older_news, last_index, last_date_saved):
 			# CHECK IF IS A NEW NEWS AND IF IS NOT CONTAINED IN THE LAST NEWS LIST.
 			# Verificar base de datos
 			print("--", end = '')
-			image_path_small = random_name(folder = 'images/news/small_images', termination = '.avif')
+			# image_path_small = random_name(folder = 'images/news/small_images', termination = '.avif')
+			# new path /var/www/wohhu-images/
+			image_path_small = img_path(title, folder = 'images/news/small_images', termination = '.avif')
 			# save_image(driver, image_url, image_path_small)
 			image_name_file = image_path_small.split('/')[-1]
 			dict_current_news = {'title':title, 'published':news_date, 'image':image_name_file, 'news_link':news_link}				
@@ -130,8 +131,6 @@ def get_list_recent_news_v2(driver, sport, max_older_news):
 	save_check_point('check_points/last_saved_news.json', last_news_saved)
 	
 	return list_upate_news
-
-# def check_process_news(driver, sport, conf_enable_news['MAX_OLDER_DATE_ALLOWED'])
 
 def click_show_more_news(driver, max_older_news, max_click_more = 5):
 	wait = WebDriverWait(driver, 5)
@@ -223,13 +222,27 @@ def extract_news_info(driver):
 		for index, current_dict in input_dict.items():
 			print("-", index, '/',len(input_dict), end= ' ')
 			current_url = current_dict['news_link']
-			wait_load_detailed_news(driver, current_url)
-			print("current_dict: ",current_dict)
-			dict_news = get_news_info_v2(driver, current_dict)
-			dict_news['published'] = process_date(dict_news['published'])
-			print("Insert news in db")
-			save_news_database(dict_news)
-			
+			######################################################
+			#	EXCEPTION TO HANDLE WEBPAGE ISSUES     #
+			######################################################
+			while True:
+				count_max = 0
+				try:
+					wait_load_detailed_news(driver, current_url)
+					print("Title: ",current_dict['title'])
+					dict_news = get_news_info_v2(driver, current_dict)
+					dict_news['published'] = process_date(dict_news['published'])
+					print("Insert news in db")
+					try:
+						save_news_database(dict_news)
+					except Exception as e:
+						print(f"An error occurred: {e}")
+					break
+				except:
+					print('Loading again...')
+					if count_max == 2:
+						break
+					count_max +=1			
 		os.remove(file_path)
 
 def main_extract_news(driver, list_sports, MAX_OLDER_DATE_ALLOWED = 31):
@@ -287,7 +300,6 @@ def main_extract_news(driver, list_sports, MAX_OLDER_DATE_ALLOWED = 31):
 			save_check_point('check_points/last_saved_news.json', last_news_saved)		
 		#################### SECTION PROCESS NEWS #########################
 		extract_news_info(driver)
-		
 
 def initial_settings_m1(driver):
 	# GET SPORTS AND SPORTS LINKS

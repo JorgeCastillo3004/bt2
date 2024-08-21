@@ -62,9 +62,11 @@ def update_match(match_element, match_id):
 
 def find_element_match(driver, name):
 	wait = WebDriverWait(driver, 10)
-	row = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//div[@title="Click for match detail!"]')))
+	row = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//*[@title="Click for match detail!"]')))
 	team1, team2 = name.split('-')
-	xpath_expression = f'//div[@title="Click for match detail!" and contains(.,"{team1}") and contains(.,"{team2}")] '
+	# xpath_expression = f'//*[@title="Click for match detail!" and contains(.,"{team1}") and contains(.,"{team2}")] '
+	xpath_expression = f'//div[contains(@class, "match--live") and contains(.,"{team1}") and contains(.,"{team2}")]'
+	print("xpath_expression: ",xpath_expression)
 	return driver.find_elements(By.XPATH, xpath_expression)
 
 def give_click_on_live(driver, sport_name):
@@ -75,18 +77,19 @@ def give_click_on_live(driver, sport_name):
 		section_title = "Click for match detail!"
 
 	wait = WebDriverWait(driver, 10)
-	# get list of games section all
-	xpath_expression_game = '//div[@title="{}"]'.format(section_title)
+	# get list of games section LIVE
+	xpath_expression_game = '//*[@title="{}"]'.format(section_title)
+	print("xpath_expression_game: ", xpath_expression_game)
 	current_tab = driver.find_elements(By.XPATH, xpath_expression_game)
-
 
 	# give click
 	webdriver.ActionChains(driver).send_keys(Keys.HOME).perform()
 	xpath_expression = '//div[@class="filters__tab" and contains(.,"LIVE")]'
 	livebutton = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_expression)))
-	livebutton.click()
+	livebutton.click()				# UNCOMENT
 	time.sleep(0.3)
 	# after click, check results or empy page.
+	# Find all the matchs availables
 	try:
 		nomatchs = driver.find_element(By.CLASS_NAME, 'nmf__title')
 		print(nomatchs.text)
@@ -133,6 +136,7 @@ def update_lives_matchs(driver):
 			for sport_name, dict_matchs in dict_pending.items():			
 
 				print("Match pending: ", len(dict_pending[sport_name]), '/', dict_pending_len[sport_name])
+				print(dict_pending[sport_name])
 
 				print_section(sport_name, space_= 10)
 				# LOAD SPORT LINK
@@ -142,31 +146,35 @@ def update_lives_matchs(driver):
 				live_games_found = give_click_on_live(driver, sport_name)
 				############################################################################### 
 				utc_time_naive = datetime.utcnow()
-				for name, match in dict_matchs.items(): # navigate on matchs by sport            
-					match_delta = (datetime.combine(datetime.min, match['match_time']) + timedelta(hours=2)).time()    				
-
+				for name, match in dict_matchs.items(): # navigate on matchs by sport
+					print("Match name: ", name)
+					match_delta = (datetime.combine(datetime.min, match['match_time']) + timedelta(hours=2)).time()
 					
-					if live_games_found and utc_time_naive.time() >= match['match_time'] and (len(name.split('-')) == 2)\
-						and utc_time_naive.time() < match_delta:# Delete last condition
+					if live_games_found:# and utc_time_naive.time() >= match['match_time']\
+						# and (len(name.split('-')) == 2):#\
+						# and utc_time_naive.time() < match_delta:# Delete last condition
 						print(name, "Match time: ", match['match_time'], utc_time_naive.time())
 						print_section("Search in lives section ", space_ = 10)
 
 						match_element = find_element_match(driver, name)
+						
 						if match_element:
+							print("Match element: ", match_element[0].text)
 							# update match status
-							try:
-								match_status = match_element[0].find_element(By.CLASS_NAME, 'event__stage--block').text
-								print("Match name: ", name, "Status: ", match_status)
-								if match_status !='Finished':
-									status = 'L'
-								elif match_status =='Finished':
-									status = 'R'
-									dict_pending_copy[sport_name].pop(name)
-									print("Match Finished delteted: ", name)
-							except:
+							print("Update match :", name)
+							# try:
+							match_status = match_element[0].find_element(By.CLASS_NAME, 'event__stage--block').text
+							print("Match name: ", name, "Status: ", match_status)
+							if match_status !='Finished':
+								status = 'L'
+							elif match_status =='Finished':
 								status = 'R'
 								dict_pending_copy[sport_name].pop(name)
 								print("Match Finished delteted: ", name)
+							# except:
+							# 	status = 'R'
+							# 	dict_pending_copy[sport_name].pop(name)
+							# 	print("Match Finished delteted: ", name)
 
 							update_match_status({'match_id':match['match_id'], 'status':status})
 							update_match(match_element[0], match['match_id'])
@@ -181,7 +189,7 @@ def update_lives_matchs(driver):
 				
 				if len(dict_pending_copy[sport_name]) == 0:
 					dict_pending_copy.pop(sport_name)
-				# break
+				stop_validate()
 			#================= Load frecuency update live results==============#
 			section_schedule = update_data()
 			new_execution_schedule = section_schedule['LIVE_SECTION']['TIME']
@@ -199,7 +207,7 @@ def update_lives_matchs(driver):
 			# Clear the output of the current cell
 			clear_output(wait=True)
 			count_break += 1
-			# stop_validate()
+		
 			
 		# if count_break == 4:
 			

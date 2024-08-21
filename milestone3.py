@@ -109,7 +109,11 @@ def get_teams_info_part2(driver, league_inf, team_info):
 # 		os.remove(file_name)
 
 def teams_creation(driver, list_sports):
+	
+	# LOAD SPORT CONFIGURATION, ENABLE, INDIVIDUAL OR TEAM
 	conf_enable_sport = check_previous_execution(file_path = 'check_points/CONFIG_M2.json')	
+	
+	# LOAD LEAGUES INFO FROM PREVIOUS STEP
 	leagues_info_json = load_check_point('check_points/leagues_info.json')
 	dict_sport_id = get_dict_sport_id()	# GET DICT SPORT FROM DATABASE
 
