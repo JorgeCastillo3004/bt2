@@ -1,14 +1,17 @@
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
+# from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+
 # from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 from datetime import date, timedelta, datetime
 from selenium import webdriver
-import chromedriver_autoinstaller
 import random
 import string
 import requests
@@ -122,7 +125,7 @@ def check_previous_execution(file_path = 'check_points/scraper_control.json'):
         dict_scraper_control = {}
     return dict_scraper_control
 
-def launch_navigator(url, headless = True):
+def launch_navigator_chrome(url, headless = True):
     options = webdriver.ChromeOptions()
     options.add_argument("--disable-application-cache")
     options.add_argument("--disable-extensions")
@@ -150,12 +153,39 @@ def launch_navigator(url, headless = True):
     driver.get(url)
     return driver
 
-def login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n"):
+def launch_navigator(url, headless= True, enable_profile=False):
+    geckodriver_path = "/usr/local/bin/geckodriver" 
+
+    # Configurar las opciones del navegador
+    options = Options()
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_argument('--disable-infobars')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-browser-side-navigation')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    if headless:
+        print('Mode headless')
+        options.add_argument('--headless')
+    if enable_profile:
+        profile_path = "/home/jorge/.mozilla/firefox/lf4ga6zv.default-release"
+        profile = FirefoxProfile(profile_path)
+        options.profile = profile
+    service = Service(geckodriver_path)
+    driver = webdriver.Firefox(options=options)    
+    driver.get(url)
+    driver.execute_script("document.body.style.zoom='50%'")    
+    return driver
+
+def login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@"):
     wait = WebDriverWait(driver, 10)
 
-    # Accept cookies
-    accept_button = wait.until(EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler")))
-    accept_button.click()
+    try:
+        # Accept cookies
+        accept_button = wait.until(EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler")))
+        accept_button.click()
+    except:
+        print("Continue...")
     # Click on login
     login_button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'header__icon.header__icon--user')))
     # login_button = driver.find_element(By.CLASS_NAME, 'header__icon.header__icon--user')
@@ -165,17 +195,23 @@ def login(driver, email_= "jignacio@jweglobal.com", password_ = "Caracas5050@\n"
     continue_email.click()
 
     email = driver.find_element(By.ID,'email')
+    email.clear()
     email = wait.until(EC.visibility_of_element_located((By.ID,'email')))
     email.send_keys(email_)
 
-    email = driver.find_element(By.ID,'passwd')
-    email.send_keys(password_)
+    password_element = driver.find_element(By.ID,'passwd')
+    password_element.clear()
+    password_element.send_keys(password_)
+    xpath_expression = '//button[contains(., "Log In")]'
+    logig = driver.find_element(By.XPATH, xpath_expression)
+    logig.click()
     time.sleep(6)
     print("Login...", '\n')
     driver.execute_script("document.body.style.zoom='50%'")
-    # webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+    webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
 
 def wait_update_page(driver, url, class_name):
+
     wait = WebDriverWait(driver, 10)
     current_tab = driver.find_elements(By.CLASS_NAME, class_name)
     driver.get(url)
@@ -243,6 +279,10 @@ def process_date(date):
 def random_name(folder = 'news_images', termination = '.jpg'):
     file_name = ''.join(random.choice(string.ascii_lowercase) for i in range(16))
     return os.path.join(folder,file_name + termination)
+
+def img_path(title, folder = 'news_images',termination = '.jpg'):
+    title = title[0:20].replace(' ','_')
+    return os.path.join(folder,title + termination)
 
 def random_name_logos(league_team, folder = 'news_images', termination = '.jpg'):
     file_name = ''.join(random.choice(string.ascii_lowercase) for i in range(4))
